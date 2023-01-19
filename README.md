@@ -1,5 +1,7 @@
 # Fiducial Tracker
 
+Using computer vision, track fiducials from multiple input client video streams (periodic images) and publish the tracked locations to listening peers.
+
 ## Conda Environment
 
 To provide consistent developer working environment, create a new Anaconda environment and installed the required packages (commands listed below).
