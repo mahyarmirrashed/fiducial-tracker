@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/tokei/lines/github/mahyarmirrashed/fiducial-tracker" alt="Total repo lines" />
 </p>
 
-Using computer vision, track fiducials from multiple input client video streams (periodic images) and publish the tracked locations to listening peers.
+Using computer vision, track fiducials from multiple input video streams (periodic images) and publish the tracked locations to listening clients.
 
 ## Conda Environment
 
