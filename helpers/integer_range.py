@@ -1,0 +1,2 @@
+class IntegerRange:
+  pass
