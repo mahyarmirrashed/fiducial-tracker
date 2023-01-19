@@ -1,4 +1,4 @@
-# Shopping Cart (Fiducial) Tracker
+# Fiducial Tracker
 
 ## Conda Environment
 
