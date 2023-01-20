@@ -1,5 +1,12 @@
 
 
+## [0.3.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.2.0...0.3.0) (2023-01-20)
+
+
+### Features
+
+* add message dropping filter based on sending delay ([6b92a66](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6b92a66d5a85c80037a9e5f56bce55b06ca77ae2))
+
 ## [0.2.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.1.1...0.2.0) (2023-01-20)
 
 
