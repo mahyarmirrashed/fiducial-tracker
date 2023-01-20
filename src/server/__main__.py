@@ -2,8 +2,6 @@
 from argparse import ArgumentParser
 from src.helpers import IntegerRange
 
-import random
-import time
 import zmq
 
 DEFAULT_COLLECTOR_PORT = 5000
@@ -33,5 +31,4 @@ publisher = context.socket(zmq.PUB)
 publisher.bind(f"tcp://*:{args.publisher}")
 
 while True:
-  publisher.send_string("Ping!")
-  time.sleep(random.random())
+  publisher.send_string(collector.recv_string())
