@@ -20,16 +20,16 @@ parser.add_argument(
 args = parser.parse_args()
 
 context = zmq.Context()
-subscriber = context.socket(zmq.SUB)
-subscriber.connect(f"tcp://localhost:{args.port}")
-subscriber.setsockopt(zmq.SUBSCRIBE, b"")
+receiver = context.socket(zmq.SUB)
+receiver.connect(f"tcp://localhost:{args.port}")
+receiver.setsockopt(zmq.SUBSCRIBE, b"")
 
 count = 0
 avg = 0
 
 while True:
   start = time.time()
-  res = subscriber.recv_string()
+  res = receiver.recv_string()
   end = time.time()
   avg *= count
   avg += end - start
