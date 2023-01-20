@@ -7,7 +7,6 @@ import zmq
 
 DEFAULT_SERVER_PORT = 5000
 
-# python -m src.receiver -p PORT
 parser = ArgumentParser(description="Fiducial tracker receiver.")
 
 parser.add_argument(
