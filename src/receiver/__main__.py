@@ -5,7 +5,7 @@ from src.helpers import IntegerRange
 import time
 import zmq
 
-DEFAULT_SERVER_PORT = 5000
+DEFAULT_PUBLISHER_PORT = 5000
 
 parser = ArgumentParser(description="Fiducial tracker receiver.")
 
@@ -13,8 +13,8 @@ parser.add_argument(
   "-p",
   "--port",
   type=IntegerRange(1024, 65536),
-  default=DEFAULT_SERVER_PORT,
-  help="Server port number",
+  default=DEFAULT_PUBLISHER_PORT,
+  help="Port number for collecting tracked fiducial locations from server",
 )
 
 args = parser.parse_args()
