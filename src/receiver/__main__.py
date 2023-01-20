@@ -5,7 +5,7 @@ from src.helpers import IntegerRange
 import time
 import zmq
 
-DEFAULT_PUBLISHER_PORT = 5000
+DEFAULT_PUBLISHER_PORT = 6000
 
 parser = ArgumentParser(description="Fiducial tracker receiver.")
 
@@ -32,7 +32,7 @@ while True:
   res = subscriber.recv_string()
   end = time.time()
   avg *= count
-  avg += (end - start)
+  avg += end - start
   count += 1
   avg /= count
   print(f"{res}, avg res time: {avg:.3f}")
