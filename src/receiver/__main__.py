@@ -14,7 +14,7 @@ parser.add_argument(
   "--port",
   type=IntegerRange(1024, 65536),
   default=DEFAULT_PUBLISHER_PORT,
-  help="Port number for collecting tracked fiducial locations from server",
+  help="Port number for collecting tracked fiducial locations",
 )
 
 args = parser.parse_args()
