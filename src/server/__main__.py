@@ -27,6 +27,7 @@ args = parser.parse_args()
 context = zmq.Context()
 collector = context.socket(zmq.SUB)
 collector.bind(f"tcp://*:{args.collector}")
+collector.setsockopt(zmq.SUBSCRIBE, b"")
 publisher = context.socket(zmq.PUB)
 publisher.bind(f"tcp://*:{args.publisher}")
 
