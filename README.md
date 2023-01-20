@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/tokei/lines/github/mahyarmirrashed/fiducial-tracker" alt="Total repo lines" />
 </p>
 
-Using computer vision, track fiducials from multiple input video streams (periodic images) and publish the tracked locations to listening clients. Shown below, multiple clients and multiple receivers can be connected to any single client.
+Using computer vision, track fiducials from multiple input client video streams (subset of frames captured) and publish the tracked locations to listening receivers. Shown below, multiple clients and multiple receivers can be connected to any single client.
 
 ![](res/diagram.png)
 
