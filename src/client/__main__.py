@@ -25,5 +25,6 @@ publisher = context.socket(zmq.PUB)
 publisher.connect(f"tcp://localhost:{args.port}")
 
 while True:
-  publisher.send_string("Ping!")
+  msg = {"captured": time.time(), "payload": "Ping!"}
   time.sleep(random.random())
+  publisher.send_json(msg)
