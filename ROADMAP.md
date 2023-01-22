@@ -1,0 +1,22 @@
+# Project Roadmap
+
+- [ ] Download and verify `darknet` functions correctly;
+- [ ] Verify proof of concept for multiple video streams;
+  - [ ] Provide separate videos to each client;
+    - [ ] Client option to specify video source: either provide streamable video file or provide reference to camera input source;
+  - [ ] Server should interface with compiled `darknet` binary;
+    - [ ] Research into what minimal files are needed;
+    - [ ] Report if minimal files are missing when server runs;
+    - [ ] Create script that initialize `darknet` module;
+  - [ ] Listeners should each receive list of identified object locations;
+    - [ ] Each item should include its `label`, `location`, `capture-time`;
+    - [ ] Tracked items should have expiration time to stop idefinitely publishing to listeners;
+- [ ] Perform transfer learning with `darknet` on YOLOv4 model onto actual fiducial target;
+  - [ ] Create fiducial dataset (use Rafid's existing dataset and augment as needed);
+- [ ] Create `calibrator` subsubmodule for `client` submodule;
+  - [ ] Assuming orthographic projection onto surface plane, only two points are needed to determine scale;
+- [ ] Enable option to track separately labelled fiducials (essentially track multiple fiducials with IDs);
+  - [ ] Research if same fiducial can be repeatedly used or if differing QR codes can be used instead;
+  - [ ] Server should have port to enable/disable tracking certain fiducial;
+    - [ ] Information may be provided from UI component;
+    - [ ] Authentication pathway on that gateway (optional);
