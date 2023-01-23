@@ -20,5 +20,5 @@ To provide consistent developer working environment, create a new Anaconda envir
 conda create -n tracker python=3.8
 conda activate tracker
 conda install -c conda-forge mamba
-mamba install -c conda-forge pyzmq
+mamba install -c conda-forge pyzmq opencv
 ```
