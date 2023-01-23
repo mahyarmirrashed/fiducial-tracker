@@ -1,6 +1,6 @@
 # Project Roadmap
 
-- [ ] Download and verify `darknet` functions correctly;
+- [x] Download and verify `darknet` functions correctly;
 - [ ] Verify proof of concept for multiple video streams;
   - [ ] Provide separate videos to each client;
     - [ ] Client option to specify video source: either provide streamable video file or provide reference to camera input source;
