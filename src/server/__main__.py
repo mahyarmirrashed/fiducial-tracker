@@ -1,30 +1,11 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
-from argparse import ArgumentParser
-from src.helpers import IntegerRangeType
+from ._args import args
 
 import time
 import zmq
 
 ALLOWABLE_MESSAGE_DELAY = 0.5
-DEFAULT_COLLECTOR_PORT = 5000
-DEFAULT_PUBLISHER_PORT = 6000
 
-parser = ArgumentParser(description="Fiducial tracking server.")
-
-parser.add_argument(
-  "--collector",
-  type=IntegerRangeType(1024, 65536),
-  default=DEFAULT_COLLECTOR_PORT,
-  help="Port number for collecting video streams",
-)
-parser.add_argument(
-  "--publisher",
-  type=IntegerRangeType(1024, 65536),
-  default=DEFAULT_PUBLISHER_PORT,
-  help="Port number for publishing tracked fiducial locations",
-)
-
-args = parser.parse_args()
 
 context = zmq.Context()
 collector = context.socket(zmq.SUB)

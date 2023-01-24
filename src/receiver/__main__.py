@@ -1,23 +1,9 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
-from argparse import ArgumentParser
-from src.helpers import IntegerRangeType
+from ._args import args
 
 import time
 import zmq
 
-DEFAULT_PUBLISHER_PORT = 6000
-
-parser = ArgumentParser(description="Fiducial tracker receiver.")
-
-parser.add_argument(
-  "-p",
-  "--port",
-  type=IntegerRangeType(1024, 65536),
-  default=DEFAULT_PUBLISHER_PORT,
-  help="Port number for collecting tracked fiducial locations",
-)
-
-args = parser.parse_args()
 
 context = zmq.Context()
 receiver = context.socket(zmq.SUB)
