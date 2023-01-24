@@ -7,7 +7,8 @@ import os
 class FileType:
   def __init__(self, allowed_extensions: List[str] = []) -> None:
     """Validates that a provided video file."""
-    assert FileType._is_list_of_str(allowed_extensions)
+    if not FileType._is_list_of_str(allowed_extensions):
+      raise ValueError("Must be an array of strings")
 
     self._allowed_extensions = allowed_extensions
 
