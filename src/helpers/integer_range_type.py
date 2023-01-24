@@ -5,8 +5,10 @@ from typing import Any, Union
 class IntegerRangeType:
   def __init__(self, lower=None, upper=None) -> None:
     """Validates that a provided integer is within range. Behaves similar to range()."""
-    assert IntegerRangeType._is_int_or_none(lower)
-    assert IntegerRangeType._is_int_or_none(upper)
+    if not IntegerRangeType._is_int_or_none(lower):
+      raise ValueError("Lower bound must be None or an integer")
+    if not IntegerRangeType._is_int_or_none(upper):
+      raise ValueError("Upper bound must be None or an integer")
 
     self._lower = lower
     self._upper = upper
