@@ -1,5 +1,5 @@
 from argparse import ArgumentTypeError
-from typing import Union
+from typing import Any, Union
 
 
 class IntegerRangeType:
@@ -11,7 +11,7 @@ class IntegerRangeType:
     self._lower = lower
     self._upper = upper
 
-  def __call__(self, arg) -> int:
+  def __call__(self, arg: Any) -> int:
     try:
       value = int(arg)
     except ValueError:
