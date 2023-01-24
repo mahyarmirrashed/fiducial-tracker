@@ -2,11 +2,11 @@ from argparse import ArgumentTypeError
 from typing import Union
 
 
-class IntegerRange:
+class IntegerRangeType:
   def __init__(self, lower=None, upper=None) -> None:
     """Validates that a provided integer is within range. Behaves similar to range()."""
-    assert IntegerRange._is_int_or_none(lower)
-    assert IntegerRange._is_int_or_none(upper)
+    assert IntegerRangeType._is_int_or_none(lower)
+    assert IntegerRangeType._is_int_or_none(upper)
 
     self._lower = lower
     self._upper = upper

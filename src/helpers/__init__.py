@@ -1,1 +1,1 @@
-from .integer_range import IntegerRange
+from .integer_range_type import IntegerRangeType

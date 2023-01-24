@@ -1,6 +1,6 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
 from argparse import ArgumentParser
-from src.helpers import IntegerRange
+from src.helpers import IntegerRangeType
 
 import random
 import time
@@ -13,7 +13,7 @@ parser = ArgumentParser(description="Fiducial tracker client.")
 parser.add_argument(
   "-p",
   "--port",
-  type=IntegerRange(1024, 65536),
+  type=IntegerRangeType(1024, 65536),
   default=DEFAULT_COLLECTOR_PORT,
   help="Port number for publishing captured video stream",
 )

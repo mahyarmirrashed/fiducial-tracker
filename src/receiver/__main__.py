@@ -1,6 +1,6 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
 from argparse import ArgumentParser
-from src.helpers import IntegerRange
+from src.helpers import IntegerRangeType
 
 import time
 import zmq
@@ -12,7 +12,7 @@ parser = ArgumentParser(description="Fiducial tracker receiver.")
 parser.add_argument(
   "-p",
   "--port",
-  type=IntegerRange(1024, 65536),
+  type=IntegerRangeType(1024, 65536),
   default=DEFAULT_PUBLISHER_PORT,
   help="Port number for collecting tracked fiducial locations",
 )
