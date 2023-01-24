@@ -29,3 +29,5 @@ group.add_argument(
 )
 
 args = parser.parse_args()
+
+args.source = args.input if args.input is not None else args.camera
