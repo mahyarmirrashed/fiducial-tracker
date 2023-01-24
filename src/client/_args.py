@@ -22,10 +22,10 @@ group.add_argument(
   help="Path to video file",
 )
 group.add_argument(
-  "-s",
-  "--source",
+  "-c",
+  "--camera",
   type=IntegerRangeType(lower=0),
-  help="Video source to use (e.g. 0)",
+  help="Camera to use (e.g. 0)",
 )
 
 args = parser.parse_args()
