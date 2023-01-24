@@ -20,7 +20,7 @@ class IntegerRangeType:
       raise ArgumentTypeError("Must be an integer")
 
     if not self._within_range(value):
-      self._raise_range_exception()
+      raise self._range_exception()
 
     return value
 
@@ -28,7 +28,7 @@ class IntegerRangeType:
   def _is_int_or_none(value: Union[int, None]) -> bool:
     return value is None or isinstance(value, int)
 
-  def _raise_range_exception(self) -> ArgumentTypeError:
+  def _range_exception(self) -> ArgumentTypeError:
     if self._lower is None:
       return ArgumentTypeError(f"Must be an integer < {self._upper}")
     elif self._upper is None:
