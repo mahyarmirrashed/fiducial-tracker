@@ -20,7 +20,7 @@ parser.add_argument(
 parser.add_argument(
   "-i",
   "--input",
-  type=FileType([".mp4", ".webm"]),
+  type=FileType(["mp4", "webm"]),
   required=True,
   help="Path to video file",
 )
