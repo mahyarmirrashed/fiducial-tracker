@@ -1,16 +1,12 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
 from ._args import args
+from ._video_reader import VideoReader
 
-import random
-import time
-import zmq
+import cv2
 
 
-context = zmq.Context()
-publisher = context.socket(zmq.PUB)
-publisher.connect(f"tcp://localhost:{args.port}")
-
-while True:
-  msg = {"captured": time.time(), "payload": "Ping!"}
-  time.sleep(random.random())
-  publisher.send_json(msg)
+with VideoReader(args.source) as vr:
+  for frame in vr.frames():
+    cv2.imshow("INPUT", frame)
+    cv2.waitKey(1)
+  cv2.destroyAllWindows()
