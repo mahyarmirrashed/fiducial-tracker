@@ -24,3 +24,9 @@ class VideoReader:
     traceback: Union[TracebackType, None],
   ) -> None:
     self._cap.release()
+
+  def frames(self) -> Generator[np.ndarray, None, None]:
+    retval, image = self._cap.read()
+    while retval:
+      yield image
+      retval, image = self._cap.read()
