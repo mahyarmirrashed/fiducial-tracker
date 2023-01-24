@@ -8,5 +8,6 @@ import cv2
 with VideoReader(args.source) as vr:
   for frame in vr.frames():
     cv2.imshow("INPUT", frame)
-    cv2.waitKey(1)
+    if cv2.waitKey(1) & 0xFF == ord("q"):
+      break
   cv2.destroyAllWindows()
