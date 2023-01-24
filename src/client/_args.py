@@ -12,12 +12,20 @@ parser.add_argument(
   default=DEFAULT_COLLECTOR_PORT,
   help="Port number for publishing captured video stream",
 )
-parser.add_argument(
+
+group = parser.add_mutually_exclusive_group(required=True)
+
+group.add_argument(
   "-i",
   "--input",
   type=FileType(["mp4", "webm"]),
-  required=True,
   help="Path to video file",
+)
+group.add_argument(
+  "-s",
+  "--source",
+  type=IntegerRangeType(lower=0),
+  help="Video source to use (e.g. 0)",
 )
 
 args = parser.parse_args()
