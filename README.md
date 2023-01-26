@@ -8,7 +8,7 @@
 
 Using computer vision, track fiducials from multiple input client video streams (subset of frames captured) and publish the tracked locations to listening receivers. Shown below, multiple clients and multiple receivers can be connected to any single client.
 
-![](res/diagram.png)
+![](res/architecture.png)
 
 Future versions can even include brokerage systems for the darknet workers to distribute incoming computer vision works.
 
