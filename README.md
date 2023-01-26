@@ -12,6 +12,10 @@ Using computer vision, track fiducials from multiple input client video streams 
 
 Future versions can even include brokerage systems for the darknet workers to distribute incoming computer vision works.
 
+Communication between the submodules is handled through Google's Protocol Buffers. The message formats and contents are shown below.
+
+![](res/communication.png)
+
 ## Conda Environment
 
 To provide consistent developer working environment, create a new Anaconda environment and installed the required packages (commands listed below).
