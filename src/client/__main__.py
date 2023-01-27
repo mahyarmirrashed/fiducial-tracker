@@ -2,7 +2,11 @@
 from ._args import args
 from ._video_reader import VideoReader
 
+from uuid import uuid4
+
 import cv2
+
+CLIENT_ID = uuid4()
 
 
 with VideoReader(args.source) as vr:
