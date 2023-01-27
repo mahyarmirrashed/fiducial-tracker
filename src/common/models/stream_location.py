@@ -1,6 +1,7 @@
 """Defines the message protocol for streaming location data."""
 
 from pydantic import NonNegativeInt
+from typing import Optional
 from uuid import UUID
 
 from . import BaseMessage
@@ -12,7 +13,7 @@ class LocationStreamRPCRequest(BaseMessage):
 
   fiducial_id: UUID
   location: Point
-  heading: NonNegativeInt
+  heading: Optional[NonNegativeInt]
 
 
 class LocationStreamRPCResponse(BaseMessage):
