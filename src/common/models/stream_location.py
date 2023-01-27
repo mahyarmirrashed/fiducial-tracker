@@ -1,4 +1,4 @@
-"""Defines the message protocol for streaming location data."""
+"""Defines the message protocol model for streaming location data."""
 
 from pydantic import NonNegativeInt
 from typing import Optional

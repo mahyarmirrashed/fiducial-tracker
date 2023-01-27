@@ -1,4 +1,4 @@
-"""Defines the message protocol for streaming video data."""
+"""Defines the message protocol model for streaming video data."""
 
 from datetime import datetime
 from numpy import ndarray
