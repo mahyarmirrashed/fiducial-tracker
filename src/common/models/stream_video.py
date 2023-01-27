@@ -3,7 +3,7 @@
 from datetime import datetime
 from numpy import ndarray
 from pydantic import NonNegativeInt
-from typing import Tuple
+from typing import Optional, Tuple
 from uuid import UUID
 
 from . import BaseMessage
@@ -15,8 +15,8 @@ class VideoStreamRequestMessage(BaseMessage):
   client_id: UUID
   frame: ndarray
   timestamp: datetime
-  corner_bottom_right: Tuple[NonNegativeInt, NonNegativeInt]
-  corner_upper_left: Tuple[NonNegativeInt, NonNegativeInt]
+  corner_bottom_right: Optional[Tuple[NonNegativeInt, NonNegativeInt]]
+  corner_upper_left: Optional[Tuple[NonNegativeInt, NonNegativeInt]]
 
 
 class VideoStreamResponseMessage(BaseMessage):
