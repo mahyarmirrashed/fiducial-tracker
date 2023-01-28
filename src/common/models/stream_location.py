@@ -9,7 +9,7 @@ from ._base import BaseMessage
 from ._point import Point
 
 
-class LocationStreamRPCRequest(BaseMessage):
+class LocationStreamRequestMessage(BaseMessage):
   """Implements the LocationStream request message arguments."""
 
   fiducial_id: uuid.UUID
@@ -17,7 +17,7 @@ class LocationStreamRPCRequest(BaseMessage):
   heading: Optional[NonNegativeInt]
 
 
-class LocationStreamRPCResponse(BaseMessage):
+class LocationStreamResponseMessage(BaseMessage):
   """Implements the LocationStream response message arguments."""
 
   pass
