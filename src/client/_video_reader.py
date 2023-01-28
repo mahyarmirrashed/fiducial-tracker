@@ -1,3 +1,4 @@
+from pydantic import NonNegativeInt
 from types import TracebackType
 from typing import Generator, Union
 from typing_extensions import Self
@@ -7,7 +8,7 @@ import numpy as np
 
 
 class VideoReader:
-  def __init__(self, source: Union[int, str]) -> None:
+  def __init__(self, source: Union[NonNegativeInt, str]) -> None:
     """Wrapper for OpenCV video reading interactions."""
     self._cap = cv.VideoCapture(source)
 
