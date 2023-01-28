@@ -5,7 +5,7 @@ from typing import Optional
 
 import uuid
 
-from . import BaseMessage
+from ._base import BaseMessage
 from ._point import Point
 
 

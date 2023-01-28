@@ -6,7 +6,7 @@ import datetime
 import numpy as np
 import uuid
 
-from . import BaseMessage
+from ._base import BaseMessage
 from ._point import Point
 
 
