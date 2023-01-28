@@ -2,7 +2,8 @@
 
 from pydantic import NonNegativeInt
 from typing import Optional
-from uuid import UUID
+
+import uuid
 
 from . import BaseMessage
 from ._point import Point
@@ -11,7 +12,7 @@ from ._point import Point
 class LocationStreamRPCRequest(BaseMessage):
   """Implements the LocationStream request message arguments."""
 
-  fiducial_id: UUID
+  fiducial_id: uuid.UUID
   location: Point
   heading: Optional[NonNegativeInt]
 

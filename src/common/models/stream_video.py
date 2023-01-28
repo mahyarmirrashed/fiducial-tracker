@@ -1,9 +1,10 @@
 """Defines the message protocol model for streaming video data."""
 
-from datetime import datetime
-from numpy import ndarray
 from typing import Optional
-from uuid import UUID
+
+import datetime
+import numpy as np
+import uuid
 
 from . import BaseMessage
 from ._point import Point
@@ -12,9 +13,9 @@ from ._point import Point
 class VideoStreamRequestMessage(BaseMessage):
   """Implements the VideoStream request message arguments."""
 
-  client_id: UUID
-  frame: ndarray
-  timestamp: datetime
+  client_id: uuid.UUID
+  frame: np.ndarray
+  timestamp: datetime.datetime
   corner_bottom_right: Optional[Point]
   corner_upper_left: Optional[Point]
 
