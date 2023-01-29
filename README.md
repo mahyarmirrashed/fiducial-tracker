@@ -21,8 +21,8 @@ Communication between the submodules is handled through Google's Protocol Buffer
 To provide consistent developer working environment, create a new Anaconda environment and installed the required packages (commands listed below).
 
 ```bash
-conda create -n tracker python=3.8
-conda activate tracker
+conda create -n fiducial-tracker python=3.8
+conda activate fiducial-tracker
 conda install -c conda-forge mamba
 mamba install -c conda-forge pyzmq opencv typing-extensions pydantic orjson
 ```
