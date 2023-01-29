@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+
 from src.common import IntegerRangeType
 
 DEFAULT_PUBLISHER_PORT = 6000

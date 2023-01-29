@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+
 from src.common import FileType, IntegerRangeType
 
 DEFAULT_COLLECTOR_PORT = 5000
