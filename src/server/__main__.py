@@ -1,31 +1,18 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
+from src.common import display
+
 from ._args import args
+from ._comms import Communicator
 
-import time
-import zmq
+import cv2
 
-ALLOWABLE_MESSAGE_DELAY = 0.5
+try:
+  with Communicator(args.collector, args.publisher) as comms:
+    while req := comms.receive():
+      print(req.frame.shape)
+      cv2.imshow("FRAME", req.frame)
 
-
-context = zmq.Context()
-collector = context.socket(zmq.SUB)
-collector.bind(f"tcp://*:{args.collector}")
-collector.setsockopt(zmq.SUBSCRIBE, b"")
-publisher = context.socket(zmq.PUB)
-publisher.bind(f"tcp://*:{args.publisher}")
-
-
-count_recvd = 0
-count_dropped = 0
-
-while True:
-  msg = collector.recv_json()
-
-  count_recvd += 1
-
-  if isinstance(msg, dict):
-    if time.time() - msg["captured"] <= ALLOWABLE_MESSAGE_DELAY:
-      publisher.send_string(msg["payload"])
-    else:
-      count_dropped += 1
-      print(f"Discarded payload... (% dropped: {100*(count_dropped/count_recvd):.1f})")
+      if cv2.waitKey(1) & 0xFF == ord("q"):
+        break
+except KeyboardInterrupt:
+  display("Server is exiting...")
