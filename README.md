@@ -12,7 +12,7 @@ Using computer vision, track fiducials from multiple input client video streams 
 
 Future versions can even include brokerage systems for the darknet workers to distribute incoming computer vision works.
 
-Communication between the submodules is handled through Google's Protocol Buffers. The message formats and contents are shown below.
+Communication between the submodules is handled using Pydantic models. The message formats are shown below.
 
 ![](res/communication.png)
 
