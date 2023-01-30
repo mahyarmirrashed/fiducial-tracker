@@ -1,5 +1,34 @@
 
 
+## [0.5.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.4.0...0.5.0) (2023-01-30)
+
+
+### Features
+
+* add ability to clear messages from screen ([40deae6](https://github.com/mahyarmirrashed/fiducial-tracker/commit/40deae60d67a7e47b4968bb0d8571f4c10459740))
+* add ability to communicate frames from client to server ([65169e9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/65169e980ae081efb7894cca1834520ccd6532a8))
+* add base message model class ([ad12936](https://github.com/mahyarmirrashed/fiducial-tracker/commit/ad12936473b278a1d91f1a9540b190850f212b9f))
+* add client-side communicator interface ([cd1a7f5](https://github.com/mahyarmirrashed/fiducial-tracker/commit/cd1a7f56b638441774d737242ea62bd9397b6e4c))
+* add location stream message protocol format ([df0dd1d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/df0dd1d79e7a73c8d5c89f1902aa615a244120e8))
+* add point model with named parameters ([4f871e4](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4f871e4fdabbe2da9e5da7ef7b888e2cc9768d2d))
+* add server-side communicator interface ([45c05a0](https://github.com/mahyarmirrashed/fiducial-tracker/commit/45c05a0511da24b6e4287bcfeab2efa3f2b35803))
+* add unique id to each client ([36f83b5](https://github.com/mahyarmirrashed/fiducial-tracker/commit/36f83b533f912f2d5eda4758f7751ab7da6339b4))
+* add video stream request and response object models ([74cbac0](https://github.com/mahyarmirrashed/fiducial-tracker/commit/74cbac04b0c0201590a1bca8e77c1aea58f937df))
+* allow sending frames as numpy arrays ([4916ddc](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4916ddc08773e93e46164c175361e1655e40ebfd))
+* convert calibrator into its own importable module ([0027489](https://github.com/mahyarmirrashed/fiducial-tracker/commit/00274892daef3393104e60054c4f9440b976b45a))
+* expose needed classes to outside submodules ([d8979c5](https://github.com/mahyarmirrashed/fiducial-tracker/commit/d8979c567852ece54860414069f97e7a07786db3))
+* extend pydantic to allow numpy arrays ([c6e2230](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c6e2230817bca5bad7ffb08f3d5370bf689bef4c))
+* make models an importable module ([4982a18](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4982a180adb11f606411be7c306fe7dd37fdb69c))
+* update to add real-time validation for integer ([4ade707](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4ade707defb96df3364159ea0457a7af6b74859e))
+
+
+### Bug Fixes
+
+* allow `orjson` to serialize numpy arrays ([5a993f2](https://github.com/mahyarmirrashed/fiducial-tracker/commit/5a993f2464e7d59eb44719e39bb5856feff08fe1))
+* make corner parameters optional ([af54ea0](https://github.com/mahyarmirrashed/fiducial-tracker/commit/af54ea0e0699eced527c35864aa5b53576437930))
+* make heading parameter optional until featuer is added on server ([30be8e7](https://github.com/mahyarmirrashed/fiducial-tracker/commit/30be8e70d543827565083682bf4bf31e29f81260))
+* prevent extra, unspecified fields onto class ([e79c620](https://github.com/mahyarmirrashed/fiducial-tracker/commit/e79c620a0fef152bbecb4a64b706158475a92f74))
+
 ## [0.4.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.3.1...0.4.0) (2023-01-25)
 
 
