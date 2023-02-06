@@ -8,14 +8,12 @@ import uuid
 from ._base import BaseMessage
 from ._point import Point
 
-from src.common.models.custom import NDArrayUint8
-
 
 class VideoStreamRequestMessage(BaseMessage):
   """Implements the VideoStream request message arguments."""
 
   client_id: uuid.UUID
-  frame: NDArrayUint8
+  encoded_frame: bytes
   timestamp: datetime.datetime
   corner_bottom_right: Optional[Point]
   corner_upper_left: Optional[Point]
