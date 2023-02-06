@@ -5,12 +5,12 @@ from ._args import args
 from ._comms import Communicator
 
 import cv2
+import qoi
 
 try:
   with Communicator(args.collector, args.publisher) as comms:
     while req := comms.receive():
-      print(req.frame.shape)
-      cv2.imshow("FRAME", req.frame)
+      cv2.imshow("FRAME", qoi.decode(req.encoded_frame))
 
       if cv2.waitKey(1) & 0xFF == ord("q"):
         break
