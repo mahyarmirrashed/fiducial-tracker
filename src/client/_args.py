@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 
 from src.common import FileType, IntegerRangeType
 
+ALLOWABLE_VIDEO_TYPES = ['mp4', 'webm']
 DEFAULT_COLLECTOR_PORT = 5000
 
 parser = ArgumentParser(description="Fiducial tracker client.")
@@ -19,8 +20,8 @@ group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument(
   "-i",
   "--input",
-  type=FileType(["mp4", "webm"]),
-  help="Path to video file",
+  type=FileType(ALLOWABLE_VIDEO_TYPES),
+  help=f"Path to video file (e.g. {ALLOWABLE_VIDEO_TYPES})",
 )
 group.add_argument(
   "-c",
