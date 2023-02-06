@@ -7,6 +7,8 @@ from src.common.models import VideoStreamRequestMessage
 
 import datetime
 import numpy as np
+import ormsgpack
+import qoi
 import uuid
 import zmq
 
@@ -34,12 +36,14 @@ class Commmunicator:
     self._context.term()
 
   def send(self, frame: np.ndarray) -> None:
-    self._socket.send_json(
-      VideoStreamRequestMessage(
-        client_id=self._uuid,
-        frame=frame,  # type: ignore
-        timestamp=datetime.datetime.now(),
-        corner_bottom_right=None,
-        corner_upper_left=None,
-      ).json()
+    self._socket.send(
+      ormsgpack.packb(
+        VideoStreamRequestMessage(
+          client_id=self._uuid,
+          encoded_frame=qoi.encode(frame),
+          timestamp=datetime.datetime.now(),
+          corner_bottom_right=None,
+          corner_upper_left=None,
+        ).dict(),
+      )
     )

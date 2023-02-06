@@ -5,6 +5,7 @@ from typing_extensions import Self
 
 from src.common.models import VideoStreamRequestMessage
 
+import ormsgpack
 import zmq
 
 
@@ -37,8 +38,6 @@ class Communicator:
     self._context.term()
 
   def receive(self) -> Optional[VideoStreamRequestMessage]:
-    json_msg = self._collector_socket.recv_json()
-
-    if isinstance(json_msg, str):
-      return VideoStreamRequestMessage.parse_raw(json_msg)
+    if (msg := self._collector_socket.recv()) is not None:
+      return ormsgpack.unpackb(msg)
     return None
