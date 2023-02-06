@@ -1,5 +1,20 @@
 
 
+## [0.6.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.5.0...0.6.0) (2023-02-06)
+
+
+### Features
+
+* add `ormsgpack` and `qoi` as messaging dependencies ([c14f53d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c14f53dda734bee11f43960d137921c08a6c8b2b))
+* remove numpy ndarray extensions for pydantic ([d71cc83](https://github.com/mahyarmirrashed/fiducial-tracker/commit/d71cc83d54573ec5fc577f630fc3beea03ccc82d))
+
+
+### Bug Fixes
+
+* encode/decode numpy arrays as an extra step before packing as message ([c9fedd8](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c9fedd87291d2cf87173677865a77e806d46417e))
+* pass unpacked dictionary into model constructor ([efa98ac](https://github.com/mahyarmirrashed/fiducial-tracker/commit/efa98accb10b6adb7d77fcc50a088adac18b575f))
+* use qoi to decode encoded frame ([628ac06](https://github.com/mahyarmirrashed/fiducial-tracker/commit/628ac06748f5a5194d54e65c90ca4889b4802071))
+
 ## [0.5.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.4.0...0.5.0) (2023-01-30)
 
 
