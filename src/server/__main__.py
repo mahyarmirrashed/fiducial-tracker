@@ -9,7 +9,7 @@ import qoi
 
 try:
   with Communicator(args.location_stream_port, args.video_stream_port) as comms:
-    while req := comms.receive():
+    while req := comms.recv():
       cv2.imshow("FRAME", qoi.decode(req.encoded_frame))
 
       if cv2.waitKey(1) & 0xFF == ord("q"):

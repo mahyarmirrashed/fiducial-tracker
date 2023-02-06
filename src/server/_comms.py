@@ -37,7 +37,7 @@ class Communicator:
     self._video_stream_socket.close()
     self._context.term()
 
-  def receive(self) -> Optional[VideoStreamRequestMessage]:
+  def recv(self) -> Optional[VideoStreamRequestMessage]:
     if (msg := self._video_stream_socket.recv()) is not None:
       return VideoStreamRequestMessage(**ormsgpack.unpackb(msg))
     return None
