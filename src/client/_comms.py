@@ -44,6 +44,6 @@ class Commmunicator:
           timestamp=datetime.datetime.now(),
           corner_bottom_right=None,
           corner_upper_left=None,
-        ).dict(),
+        ).dict()
       )
     )
