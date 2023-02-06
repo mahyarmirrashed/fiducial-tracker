@@ -24,5 +24,6 @@ To provide consistent developer working environment, create a new Anaconda envir
 conda create -n fiducial-tracker python=3.8
 conda activate fiducial-tracker
 conda install -c conda-forge mamba
-mamba install -c conda-forge pyzmq opencv typing-extensions pydantic orjson
+mamba install -c conda-forge pyzmq opencv typing-extensions pydantic
+pip3 install ormsgpack qoi
 ```
