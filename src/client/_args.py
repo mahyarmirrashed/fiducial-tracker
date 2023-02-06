@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from src.common import FileType, IntegerRangeType
 
 ALLOWABLE_VIDEO_TYPES = ['mp4', 'webm']
-DEFAULT_COLLECTOR_PORT = 5000
+DEFAULT_VIDEO_STREAM_PORT = 5000
 
 parser = ArgumentParser(description="Fiducial tracker client.")
 
@@ -11,7 +11,7 @@ parser.add_argument(
   "-p",
   "--port",
   type=IntegerRangeType(1024, 65536),
-  default=DEFAULT_COLLECTOR_PORT,
+  default=DEFAULT_VIDEO_STREAM_PORT,
   help="Port number for publishing captured video stream",
 )
 
