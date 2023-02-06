@@ -8,13 +8,13 @@ DEFAULT_LOCATION_STREAM_PORT = 6000
 parser = ArgumentParser(description="Fiducial tracking server.")
 
 parser.add_argument(
-  "--collector",
+  "--video-stream-port",
   type=IntegerRangeType(1024, 65536),
   default=DEFAULT_VIDEO_STREAM_PORT,
   help="Port number for collecting video streams",
 )
 parser.add_argument(
-  "--publisher",
+  "--location-stream-port",
   type=IntegerRangeType(1024, 65536),
   default=DEFAULT_LOCATION_STREAM_PORT,
   help="Port number for publishing tracked fiducial locations",

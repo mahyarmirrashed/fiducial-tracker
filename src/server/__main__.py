@@ -8,7 +8,7 @@ import cv2
 import qoi
 
 try:
-  with Communicator(args.collector, args.publisher) as comms:
+  with Communicator(args.location_stream_port, args.video_stream_port) as comms:
     while req := comms.receive():
       cv2.imshow("FRAME", qoi.decode(req.encoded_frame))
 
