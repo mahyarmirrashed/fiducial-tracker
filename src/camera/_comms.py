@@ -1,9 +1,13 @@
 from pydantic import NonNegativeInt
 from types import TracebackType
-from typing import List, Union
+from typing import List, Optional, Union
 from typing_extensions import Self
 
-from src.common.models import Point, VideoStreamRequestMessage
+from src.common.models import (
+  Point,
+  VideoStreamRequestMessage,
+  VideoStreamResponseMessage,
+)
 
 import datetime
 import numpy as np
@@ -54,3 +58,8 @@ class Commmunicator:
         ).dict()
       )
     )
+
+  def recv(self) -> Optional[VideoStreamResponseMessage]:
+    if (msg := self._socket.recv()) is not None:
+      return VideoStreamResponseMessage(**ormsgpack.unpackb(msg))
+    return None
