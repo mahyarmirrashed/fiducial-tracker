@@ -1,5 +1,20 @@
 
 
+## [0.7.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.6.0...0.7.0) (2023-02-07)
+
+
+### Features
+
+* add ability to send fiducial locations to receivers ([c1b3230](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c1b3230e8ba9a9acf3a085ab2c40871848461b7c))
+* display received fiducials and their locations ([154e6ec](https://github.com/mahyarmirrashed/fiducial-tracker/commit/154e6ec1df24ceafbc011fbdd99e9eee791ec420))
+* make point model public ([5bb79a7](https://github.com/mahyarmirrashed/fiducial-tracker/commit/5bb79a704fe995101293286bb03b06b8331e24cd))
+* **receiver:** add ability to receive location stream requests ([9a0afbc](https://github.com/mahyarmirrashed/fiducial-tracker/commit/9a0afbc829ba02cedfe7f16ce23e123231b8c101))
+
+
+### Bug Fixes
+
+* force pydantic to validate field constraints ([7b13bd2](https://github.com/mahyarmirrashed/fiducial-tracker/commit/7b13bd2065ce198b63a3f90becdd4a388336829f))
+
 ## [0.6.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.5.0...0.6.0) (2023-02-06)
 
 
