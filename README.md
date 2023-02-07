@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/tokei/lines/github/mahyarmirrashed/fiducial-tracker" alt="Total repo lines" />
 </p>
 
-Using `darknet`, a computer vision framework, collect video streams from clients, analyze for fiducials, and publish tracked fiducial locations to listening receivers. The server acts as a broker service that distributes analysis workload to `darknet` computer vision workers, and then periodically publishes tracked results to receivers. A diagram of the architecture is shown below.
+Using `darknet`, a computer vision framework, collect video streams from cameras, analyze for fiducials, and publish tracked fiducial locations to listening receivers. The server acts as a broker service that distributes analysis workload to `darknet` computer vision workers, and then periodically publishes tracked results to receivers. A diagram of the architecture is shown below.
 
 ![](res/architecture.png)
 

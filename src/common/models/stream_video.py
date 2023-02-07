@@ -12,7 +12,7 @@ from .point import Point
 class VideoStreamRequestMessage(BaseMessage):
   """Implements the VideoStream request message arguments."""
 
-  client_id: uuid.UUID
+  camera_id: uuid.UUID
   encoded_frame: bytes
   timestamp: datetime.datetime
   corner_bottom_right: Optional[Point]

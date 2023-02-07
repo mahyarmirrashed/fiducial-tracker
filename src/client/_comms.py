@@ -1,28 +1,24 @@
 from pydantic import NonNegativeInt
 from types import TracebackType
-from typing import Union
+from typing import Optional, Union
 from typing_extensions import Self
 
-from src.common.models import VideoStreamRequestMessage
+from src.common.models import LocationStreamRequestMessage
 
-import datetime
-import numpy as np
 import ormsgpack
-import qoi
-import uuid
 import zmq
 
 
-class Commmunicator:
-  def __init__(self, port: NonNegativeInt, uuid: uuid.UUID) -> None:
+class Communicator:
+  def __init__(self, port: NonNegativeInt) -> None:
     """Communicator with fiducial tracker server."""
     self._port = port
-    self._uuid = uuid
 
   def __enter__(self) -> Self:
     self._context = zmq.Context()
-    self._socket = self._context.socket(zmq.PUB)
+    self._socket = self._context.socket(zmq.SUB)
     self._socket.connect(f"tcp://localhost:{self._port}")
+    self._socket.setsockopt(zmq.SUBSCRIBE, b"")
 
     return self
 
@@ -35,15 +31,7 @@ class Commmunicator:
     self._socket.close()
     self._context.term()
 
-  def send(self, frame: np.ndarray) -> None:
-    self._socket.send(
-      ormsgpack.packb(
-        VideoStreamRequestMessage(
-          client_id=self._uuid,
-          encoded_frame=qoi.encode(frame),
-          timestamp=datetime.datetime.now(),
-          corner_bottom_right=None,
-          corner_upper_left=None,
-        ).dict()
-      )
-    )
+  def recv(self) -> Optional[LocationStreamRequestMessage]:
+    if (msg := self._socket.recv()) is not None:
+      return LocationStreamRequestMessage(**ormsgpack.unpackb(msg))
+    return None

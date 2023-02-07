@@ -17,7 +17,7 @@ class Communicator:
   def __init__(
     self, location_stream_port: NonNegativeInt, video_stream_port: NonNegativeInt
   ) -> None:
-    """Communicator with fiducial tracker clients and receivers."""
+    """Communicator with fiducial tracker cameras and clients."""
     self._location_stream_port = location_stream_port
     self._video_stream_port = video_stream_port
 
