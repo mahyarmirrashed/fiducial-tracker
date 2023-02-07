@@ -2,7 +2,7 @@ from pydantic import NonNegativeInt
 from threading import Event, Thread
 from typing import List
 
-from src.common import clear, display
+from src.common import display
 from src.common.models import Point
 
 from ._video_reader import VideoReader
