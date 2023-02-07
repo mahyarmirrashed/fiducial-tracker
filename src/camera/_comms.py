@@ -1,9 +1,9 @@
 from pydantic import NonNegativeInt
 from types import TracebackType
-from typing import Union
+from typing import List, Union
 from typing_extensions import Self
 
-from src.common.models import VideoStreamRequestMessage
+from src.common.models import Point, VideoStreamRequestMessage
 
 import datetime
 import numpy as np
@@ -14,10 +14,17 @@ import zmq
 
 
 class Commmunicator:
-  def __init__(self, port: NonNegativeInt, uuid: uuid.UUID) -> None:
+  def __init__(
+    self,
+    port: NonNegativeInt,
+    uuid: uuid.UUID,
+    corners: List[Point],
+  ) -> None:
     """Communicator with fiducial tracker server."""
     self._port = port
     self._uuid = uuid
+    self._bottom_left_corner = corners[0]
+    self._top_right_corner = corners[1]
 
   def __enter__(self) -> Self:
     self._context = zmq.Context()
@@ -42,8 +49,8 @@ class Commmunicator:
           camera_id=self._uuid,
           encoded_frame=qoi.encode(frame),
           timestamp=datetime.datetime.now(),
-          bottom_left_corner=None,
-          top_right_corner=None,
+          bottom_left_corner=self._bottom_left_corner,
+          top_right_corner=self._top_right_corner,
         ).dict()
       )
     )
