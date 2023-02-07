@@ -31,23 +31,15 @@ group.add_argument(
 )
 
 parser.add_argument(
-  "--bottom-left-corner",
+  "--corners",
   type=PointType(),
-  help="Bottom left corner in real world coordinates",
-)
-parser.add_argument(
-  "--top-right-corner",
-  type=PointType(),
-  help="Top right corner in real world coordinates",
+  nargs=2,
+  help="Corners (bottom_left, top_right) in real world coordinates",
 )
 
 args = parser.parse_args()
 
-args.source = args.input if args.input is not None else args.camera
-args.missing_corners = args.bottom_left_corner is None or args.top_right_corner is None
+args.source = args.input if args.camera is None else args.camera
 
-if args.input and args.missing_corners:
-  parser.error("-i/--input requires --bottom-left-corner and --top-right-corner")
-
-if (args.bottom_left_corner is None) ^ (args.top_right_corner is None):
-  parser.error("both of the arguments --bottom-left-corner and --top-right-corner are required")  # fmt: skip
+if args.input and args.corners is None:
+  parser.error("-i/--input requires --corners")
