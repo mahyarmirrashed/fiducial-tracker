@@ -6,13 +6,7 @@ from ._base import BaseMessage
 from .fiducial import Fiducial
 
 
-class LocationStreamRequestMessage(BaseMessage):
-  """Implements the LocationStream request message arguments."""
+class LocationStreamMessage(BaseMessage):
+  """Implements the LocationStream message arguments."""
 
   fiducials: List[Fiducial]
-
-
-class LocationStreamResponseMessage(BaseMessage):
-  """Implements the LocationStream response message arguments."""
-
-  pass

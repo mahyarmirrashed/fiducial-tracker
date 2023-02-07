@@ -7,10 +7,15 @@ from ._comms import Communicator
 import cv2
 import qoi
 
+RECOMMENDED_FPS = 30
+
+
 try:
   with Communicator(args.location_stream_port, args.video_stream_port) as comms:
-    while req := comms.recv():
-      cv2.imshow("FRAME", qoi.decode(req.encoded_frame))
+    while req := comms.recv_video_stream():
+      cv2.imshow("Camera stream", qoi.decode(req.encoded_frame))
+
+      comms.send_video_stream(RECOMMENDED_FPS)
 
       if cv2.waitKey(1) & 0xFF == ord("q"):
         break

@@ -5,8 +5,9 @@ from typing_extensions import Self
 
 from src.common.models import (
   Fiducial,
-  LocationStreamRequestMessage,
+  LocationStreamMessage,
   VideoStreamRequestMessage,
+  VideoStreamResponseMessage,
 )
 
 import ormsgpack
@@ -25,9 +26,8 @@ class Communicator:
     self._context = zmq.Context()
     self._location_stream_socket = self._context.socket(zmq.PUB)
     self._location_stream_socket.bind(f"tcp://*:{self._location_stream_port}")
-    self._video_stream_socket = self._context.socket(zmq.SUB)
+    self._video_stream_socket = self._context.socket(zmq.REP)
     self._video_stream_socket.bind(f"tcp://*:{self._video_stream_port}")
-    self._video_stream_socket.setsockopt(zmq.SUBSCRIBE, b"")
 
     return self
 
@@ -41,14 +41,21 @@ class Communicator:
     self._video_stream_socket.close()
     self._context.term()
 
-  def recv(self) -> Optional[VideoStreamRequestMessage]:
+  def recv_video_stream(self) -> Optional[VideoStreamRequestMessage]:
     if (msg := self._video_stream_socket.recv()) is not None:
       return VideoStreamRequestMessage(**ormsgpack.unpackb(msg))
     return None
 
-  def send(self, fiducials: List[Fiducial]) -> None:
+  def send_location_stream(self, fiducials: List[Fiducial]) -> None:
     self._location_stream_socket.send(
       ormsgpack.packb(
-        LocationStreamRequestMessage(fiducials=fiducials).dict(),
+        LocationStreamMessage(fiducials=fiducials).dict(),
+      )
+    )
+
+  def send_video_stream(self, recommended_fps: NonNegativeInt) -> None:
+    self._video_stream_socket.send(
+      ormsgpack.packb(
+        VideoStreamResponseMessage(recommended_fps=recommended_fps).dict()
       )
     )
