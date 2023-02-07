@@ -1,5 +1,21 @@
 
 
+## [0.9.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.8.0...0.9.0) (2023-02-07)
+
+
+### Features
+
+* add `recv` method for `VideoStreamResponseMessage` ([6e83983](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6e8398308580f7e406d4e883fd03cb62caa85380))
+* add camera fps regulator ([1eac9cb](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1eac9cbc5b1064b11611f9ec7383f1bdd0031f62))
+* add method for sending `VideoStreamMessage` response models ([8798d73](https://github.com/mahyarmirrashed/fiducial-tracker/commit/8798d737f5cd762c3e39f7c5e71eda7def70cc34))
+* implement response model for `VideoStreamMessage` ([c115c46](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c115c4636bb35310103e856bc6e261860c2d8c55))
+
+
+### Bug Fixes
+
+* add typing on `send_video_stream` arguments ([1c08883](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1c088832754669f45e7a0e5daa0b81e8787f0685))
+* update port type to REQ ([9032fb3](https://github.com/mahyarmirrashed/fiducial-tracker/commit/9032fb3862ed2e25d3a9c4b0ef6835eefcbedea7))
+
 ## [0.8.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.7.0...0.8.0) (2023-02-07)
 
 
