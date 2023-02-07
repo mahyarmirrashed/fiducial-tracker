@@ -53,7 +53,7 @@ class Communicator:
       )
     )
 
-  def send_video_stream(self, recommended_fps) -> None:
+  def send_video_stream(self, recommended_fps: NonNegativeInt) -> None:
     self._video_stream_socket.send(
       ormsgpack.packb(
         VideoStreamResponseMessage(recommended_fps=recommended_fps).dict()
