@@ -6,15 +6,9 @@
   <img src="https://img.shields.io/tokei/lines/github/mahyarmirrashed/fiducial-tracker" alt="Total repo lines" />
 </p>
 
-Using computer vision, track fiducials from multiple input client video streams (subset of frames captured) and publish the tracked locations to listening receivers. Shown below, multiple clients and multiple receivers can be connected to any single client.
+Using `darknet`, a computer vision framework, collect video streams from clients, analyze for fiducials, and publish tracked fiducial locations to listening receivers. The server acts as a broker service that distributes analysis workload to `darknet` computer vision workers, and then periodically publishes tracked results to receivers. A diagram of the architecture is shown below.
 
 ![](res/architecture.png)
-
-Future versions can even include brokerage systems for the darknet workers to distribute incoming computer vision works.
-
-Communication between the submodules is handled using Pydantic models. The message formats are shown below.
-
-![](res/communication.png)
 
 ## Conda Environment
 
