@@ -22,5 +22,8 @@ try:
 
       for frame in video_reader.frames():
         comms.send(frame)
+
+        if res := comms.recv():
+          video_reader.fps = res.recommended_fps
 except KeyboardInterrupt:
   display(f"Camera ({CAMERA_ID}) is exiting...")
