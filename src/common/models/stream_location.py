@@ -1,20 +1,15 @@
 """Defines the message protocol model for streaming location data."""
 
-from pydantic import NonNegativeInt
-from typing import Optional
-
-import uuid
+from typing import List
 
 from ._base import BaseMessage
-from ._point import Point
+from .fiducial import Fiducial
 
 
 class LocationStreamRequestMessage(BaseMessage):
   """Implements the LocationStream request message arguments."""
 
-  fiducial_id: uuid.UUID
-  location: Point
-  heading: Optional[NonNegativeInt]
+  fiducials: List[Fiducial]
 
 
 class LocationStreamResponseMessage(BaseMessage):
