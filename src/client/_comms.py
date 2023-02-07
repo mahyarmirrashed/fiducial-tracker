@@ -3,7 +3,7 @@ from types import TracebackType
 from typing import Optional, Union
 from typing_extensions import Self
 
-from src.common.models import LocationStreamRequestMessage
+from src.common.models import LocationStreamMessage
 
 import ormsgpack
 import zmq
@@ -31,7 +31,7 @@ class Communicator:
     self._socket.close()
     self._context.term()
 
-  def recv(self) -> Optional[LocationStreamRequestMessage]:
+  def recv(self) -> Optional[LocationStreamMessage]:
     if (msg := self._socket.recv()) is not None:
-      return LocationStreamRequestMessage(**ormsgpack.unpackb(msg))
+      return LocationStreamMessage(**ormsgpack.unpackb(msg))
     return None
