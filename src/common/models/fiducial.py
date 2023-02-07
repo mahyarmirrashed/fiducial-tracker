@@ -12,3 +12,6 @@ class Fiducial(BaseModel):
   id: uuid.UUID = Field(..., allow_mutation=False)
   location: Point
   heading: Optional[NonNegativeInt]
+
+  class Config:
+    validate_assignment = True
