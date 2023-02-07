@@ -1,9 +1,13 @@
 from pydantic import NonNegativeInt
 from types import TracebackType
-from typing import Optional, Union
+from typing import List, Optional, Union
 from typing_extensions import Self
 
-from src.common.models import VideoStreamRequestMessage
+from src.common.models import (
+  Fiducial,
+  LocationStreamRequestMessage,
+  VideoStreamRequestMessage,
+)
 
 import ormsgpack
 import zmq
@@ -41,3 +45,10 @@ class Communicator:
     if (msg := self._video_stream_socket.recv()) is not None:
       return VideoStreamRequestMessage(**ormsgpack.unpackb(msg))
     return None
+
+  def send(self, fiducials: List[Fiducial]) -> None:
+    self._location_stream_socket.send(
+      ormsgpack.packb(
+        LocationStreamRequestMessage(fiducials=fiducials).dict(),
+      )
+    )
