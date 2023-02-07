@@ -32,7 +32,7 @@ class Commmunicator:
 
   def __enter__(self) -> Self:
     self._context = zmq.Context()
-    self._socket = self._context.socket(zmq.PUB)
+    self._socket = self._context.socket(zmq.REQ)
     self._socket.connect(f"tcp://localhost:{self._port}")
 
     return self
