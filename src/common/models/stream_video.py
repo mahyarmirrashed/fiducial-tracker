@@ -1,5 +1,7 @@
 """Defines the message protocol model for streaming video data."""
 
+from pydantic import NonNegativeInt
+
 import datetime
 import uuid
 
@@ -20,4 +22,4 @@ class VideoStreamRequestMessage(BaseMessage):
 class VideoStreamResponseMessage(BaseMessage):
   """Implements the VideoStream response message arguments."""
 
-  pass
+  recommended_fps: NonNegativeInt
