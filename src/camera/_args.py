@@ -1,8 +1,8 @@
 from argparse import ArgumentParser
 
-from src.common import FileType, IntegerRangeType
+from src.common import FileType, IntegerRangeType, PointType
 
-ALLOWABLE_VIDEO_TYPES = ['mp4', 'webm']
+ALLOWABLE_VIDEO_TYPES = ["mp4", "webm"]
 DEFAULT_VIDEO_STREAM_PORT = 5000
 
 parser = ArgumentParser(description="Fiducial tracker camera.")
@@ -30,6 +30,24 @@ group.add_argument(
   help="Camera to use (e.g. 0)",
 )
 
+parser.add_argument(
+  "--bottom-right-corner",
+  type=PointType(),
+  help="Bottom right corner in real world coordinates",
+)
+parser.add_argument(
+  "--top-left-corner",
+  type=PointType(),
+  help="Top left corner in real world coordinates",
+)
+
 args = parser.parse_args()
 
 args.source = args.input if args.input is not None else args.camera
+args.missing_corners = args.bottom_right_corner is None or args.top_left_corner is None
+
+if args.input and args.missing_corners:
+  parser.error("-i/--input requires --bottom-right-corner and --top-left-corner")
+
+if (args.bottom_right_corner is None) ^ (args.top_left_corner is None):
+  parser.error("both of the arguments --bottom-right-corner and --top-left-corner are required")  # fmt: skip
