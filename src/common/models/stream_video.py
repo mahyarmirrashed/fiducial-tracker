@@ -1,7 +1,5 @@
 """Defines the message protocol model for streaming video data."""
 
-from typing import Optional
-
 import datetime
 import uuid
 
@@ -15,8 +13,8 @@ class VideoStreamRequestMessage(BaseMessage):
   camera_id: uuid.UUID
   encoded_frame: bytes
   timestamp: datetime.datetime
-  bottom_left_corner: Optional[Point]
-  top_right_corner: Optional[Point]
+  bottom_left_corner: Point
+  top_right_corner: Point
 
 
 class VideoStreamResponseMessage(BaseMessage):
