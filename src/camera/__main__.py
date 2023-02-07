@@ -12,11 +12,11 @@ CAMERA_ID = uuid4()
 
 
 if args.camera is not None and args.corners is None:
-  with VideoReader(args.source) as video_reader:
+  with VideoReader(args.src) as video_reader:
     args.corners = Calibrator(video_reader).calibrate()
 
 try:
-  with VideoReader(args.source) as video_reader:
+  with VideoReader(args.src) as video_reader:
     with Commmunicator(args.port, CAMERA_ID, args.corners) as comms:
       display(f"Camera ({CAMERA_ID}) is streaming video...")
 

@@ -39,7 +39,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-args.source = args.input if args.camera is None else args.camera
+args.src = args.input if args.camera is None else args.camera
 
 if args.input and args.corners is None:
   parser.error("-i/--input requires --corners")
