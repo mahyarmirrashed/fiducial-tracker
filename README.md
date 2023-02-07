@@ -12,12 +12,12 @@ Using `darknet`, a computer vision framework, collect video streams from clients
 
 ## Conda Environment
 
-To provide consistent developer working environment, create a new Anaconda environment and installed the required packages (commands listed below).
+Create a new Anaconda environment and installed the required packages (commands listed below).
 
 ```bash
-conda create -n fiducial-tracker python=3.8
+conda create -n fiducial-tracker python=3.8 -y
 conda activate fiducial-tracker
-conda install -c conda-forge mamba
-mamba install -c conda-forge pyzmq opencv typing-extensions pydantic
+conda install -c conda-forge mamba -y
+mamba install -c conda-forge pyzmq opencv typing-extensions pydantic -y
 pip3 install ormsgpack qoi
 ```
