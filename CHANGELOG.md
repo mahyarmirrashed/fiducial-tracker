@@ -1,5 +1,20 @@
 
 
+## [0.8.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.7.0...0.8.0) (2023-02-07)
+
+
+### Features
+
+* add ability to parse corners from cli ([44ba331](https://github.com/mahyarmirrashed/fiducial-tracker/commit/44ba331aac7f7daae936ce51246c846f9bc45242))
+* add corner calibrator ([e4d0c1b](https://github.com/mahyarmirrashed/fiducial-tracker/commit/e4d0c1b9cab40a667836362e8a499747cafa105b))
+* add parameter to specify corners ([f26c327](https://github.com/mahyarmirrashed/fiducial-tracker/commit/f26c32785191d03e55575493e604883727400a13))
+* make point type return a `Point` model ([4980f81](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4980f81cb95179672976adf833bd2c54478fd187))
+
+
+### Bug Fixes
+
+* make corners mandatory in messages ([7676a08](https://github.com/mahyarmirrashed/fiducial-tracker/commit/7676a08030e08d3b763837f557df7005071c9598))
+
 ## [0.7.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.6.0...0.7.0) (2023-02-07)
 
 
