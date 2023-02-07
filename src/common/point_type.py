@@ -1,6 +1,6 @@
 from argparse import ArgumentTypeError
 from pydantic import NonNegativeInt
-from typing import Any, Tuple
+from typing import Any
 
 from src.common.models import Point
 
