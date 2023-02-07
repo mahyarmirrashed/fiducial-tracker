@@ -5,7 +5,7 @@ from typing import Optional
 
 import uuid
 
-from ._point import Point
+from .point import Point
 
 
 class Fiducial(BaseModel):

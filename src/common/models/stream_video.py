@@ -6,7 +6,7 @@ import datetime
 import uuid
 
 from ._base import BaseMessage
-from ._point import Point
+from .point import Point
 
 
 class VideoStreamRequestMessage(BaseMessage):
