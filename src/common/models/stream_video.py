@@ -15,8 +15,8 @@ class VideoStreamRequestMessage(BaseMessage):
   camera_id: uuid.UUID
   encoded_frame: bytes
   timestamp: datetime.datetime
-  corner_bottom_right: Optional[Point]
-  corner_upper_left: Optional[Point]
+  bottom_left_corner: Optional[Point]
+  top_right_corner: Optional[Point]
 
 
 class VideoStreamResponseMessage(BaseMessage):

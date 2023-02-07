@@ -42,8 +42,8 @@ class Commmunicator:
           camera_id=self._uuid,
           encoded_frame=qoi.encode(frame),
           timestamp=datetime.datetime.now(),
-          corner_bottom_right=None,
-          corner_upper_left=None,
+          bottom_left_corner=None,
+          top_right_corner=None,
         ).dict()
       )
     )
