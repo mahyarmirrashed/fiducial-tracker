@@ -7,6 +7,6 @@ from ._comms import Communicator
 try:
   with Communicator(args.port) as comms:
     while req := comms.recv():
-      pass
+      display("\n".join(map(repr, req.fiducials)))
 except KeyboardInterrupt:
   display("Receiver is exiting...")
