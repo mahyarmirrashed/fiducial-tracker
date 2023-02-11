@@ -33,3 +33,12 @@ class _DetectionNumberPairStruct(Structure):
     ("num", c_int),
     ("dets", POINTER(_DetectionStruct)),
   ]
+
+
+class _ImageStruct(Structure):
+  _fields_ = [
+    ("w", c_int),
+    ("h", c_int),
+    ("c", c_int),
+    ("data", POINTER(c_float)),
+  ]
