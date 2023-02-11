@@ -26,3 +26,10 @@ class _DetectionStruct(Structure):
     ("sim", c_float),
     ("track_id", c_int),
   ]
+
+
+class _DetectionNumberPairStruct(Structure):
+  _fields_ = [
+    ("num", c_int),
+    ("dets", POINTER(_DetectionStruct)),
+  ]
