@@ -14,7 +14,7 @@ DEFAULT_NAME_POSIX = "libdarknet.so"
 DEFAULT_NAME_WINDOWS = "darknet.dll"
 
 
-class Library:
+class Darknet:
   def __init__(self) -> None:
     if os.name == "posix":
       self._load(f"{os.path.dirname(__file__)}/{DEFAULT_NAME_POSIX}")
