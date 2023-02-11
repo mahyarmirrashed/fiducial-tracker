@@ -16,6 +16,8 @@ import qoi
 import uuid
 import zmq
 
+DEFAULT_TIMEOUT = 5_000  # milliseconds
+
 
 class Commmunicator:
   def __init__(
@@ -33,6 +35,7 @@ class Commmunicator:
   def __enter__(self) -> Self:
     self._context = zmq.Context()
     self._socket = self._context.socket(zmq.REQ)
+    self._socket.setsockopt(zmq.REQ_RELAXED, True)
     self._socket.connect(f"tcp://localhost:{self._port}")
 
     return self
@@ -60,6 +63,6 @@ class Commmunicator:
     )
 
   def recv(self) -> Optional[VideoStreamResponseMessage]:
-    if (msg := self._socket.recv()) is not None:
-      return VideoStreamResponseMessage(**ormsgpack.unpackb(msg))
+    if self._socket.poll(DEFAULT_TIMEOUT, zmq.POLLIN):
+      return VideoStreamResponseMessage(**ormsgpack.unpackb(self._socket.recv()))
     return None
