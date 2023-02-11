@@ -10,7 +10,7 @@ class _BoxStruct(Structure):
   ]
 
 
-class _DetectionStruct(Structure):
+class DetectionStruct(Structure):
   _fields_ = [
     ("bbox", _BoxStruct),
     ("classes", c_int),
@@ -28,14 +28,14 @@ class _DetectionStruct(Structure):
   ]
 
 
-class _DetectionNumberPairStruct(Structure):
+class DetectionNumberPairStruct(Structure):
   _fields_ = [
     ("num", c_int),
-    ("dets", POINTER(_DetectionStruct)),
+    ("dets", POINTER(DetectionStruct)),
   ]
 
 
-class _ImageStruct(Structure):
+class ImageStruct(Structure):
   _fields_ = [
     ("w", c_int),
     ("h", c_int),
@@ -44,7 +44,7 @@ class _ImageStruct(Structure):
   ]
 
 
-class _MetadataStruct(Structure):
+class MetadataStruct(Structure):
   _fields_ = [
     ("classes", c_int),
     ("names", POINTER(c_char_p)),
