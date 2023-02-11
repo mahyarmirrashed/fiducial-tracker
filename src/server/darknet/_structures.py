@@ -1,4 +1,4 @@
-from ctypes import c_float, c_int, POINTER, Structure
+from ctypes import c_char_p, c_float, c_int, POINTER, Structure
 
 
 class _BoxStruct(Structure):
@@ -41,4 +41,11 @@ class _ImageStruct(Structure):
     ("h", c_int),
     ("c", c_int),
     ("data", POINTER(c_float)),
+  ]
+
+
+class _MetadataStruct(Structure):
+  _fields_ = [
+    ("classes", c_int),
+    ("names", POINTER(c_char_p)),
   ]
