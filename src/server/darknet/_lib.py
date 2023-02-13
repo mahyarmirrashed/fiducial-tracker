@@ -75,3 +75,13 @@ class Darknet:
 
   def get_network_width(self, network: Network) -> int:
     return self._lib.network_width(network.get())
+
+  def load(
+    self, config_path: str, data_path: str, weights_path: str, batch_size: int = 1
+  ) -> Network:
+    return Network(
+      network=self._lib.load_network_custom(
+        config_path.encode("ascii"), weights_path.encode("ascii"), 0, batch_size
+      ),
+      metadata=self._lib.load_meta(data_path.encode("ascii")),
+    )
