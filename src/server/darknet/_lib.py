@@ -68,3 +68,9 @@ class Darknet:
     self._setup_binding(self._lib.network_predict_image, [c_void_p, ImageStruct], POINTER(c_float))  # fmt: skip
     self._setup_binding(self._lib.network_predict_image_letterbox, [c_void_p, ImageStruct], POINTER(c_float))  # fmt: skip
     self._setup_binding(self._lib.network_predict_batch,[c_void_p, ImageStruct, c_int, c_int, c_int, c_float, c_float, POINTER(c_int), c_int, c_int], POINTER(DetectionNumberPairStruct))  # fmt: skip
+
+  def get_network_height(self, network: Any) -> int:
+    return self._lib.network_height(network)
+
+  def get_network_width(self, network: Any) -> int:
+    return self._lib.network_width(network)
