@@ -1,14 +1,15 @@
 from argparse import ArgumentTypeError
-from typing import Any, List
+from typing import Any, List, Union
 
 import os
 
 
 class FileType:
-  def __init__(self, allowed_extensions: List[str] = []) -> None:
+  def __init__(self, allowed_extensions: Union[List[str], str] = []) -> None:
     """Validates that a provided video file."""
-    if not FileType._is_list_of_str(allowed_extensions):
-      raise ValueError("Must be an array of strings")
+    if not FileType._is_str(allowed_extensions):
+      if not FileType._is_list_of_str(allowed_extensions):
+        raise ValueError("Must be an array of strings")
 
     self._allowed_extensions = allowed_extensions
 
@@ -24,11 +25,11 @@ class FileType:
     return str(arg)
 
   @staticmethod
-  def _is_str(value: str) -> bool:
+  def _is_str(value: Any) -> bool:
     return value is not None and isinstance(value, str)
 
   @staticmethod
-  def _is_list_of_str(values: List[str]) -> bool:
+  def _is_list_of_str(values: Any) -> bool:
     return (
       values is not None
       and isinstance(values, list)
