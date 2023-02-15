@@ -7,6 +7,7 @@ import os
 _CURRENT_FILE_PATH = str(os.path.dirname(os.path.realpath(__file__)))
 
 DEFAULT_CONFIG_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/yolov4.cfg"
+DEFAULT_DATA_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/coco.data"
 DEFAULT_WEIGHTS_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/yolov4.weights"
 
 DEFAULT_VIDEO_STREAM_PORT = 5000
@@ -31,6 +32,12 @@ parser.add_argument(
   type=FileType("cfg"),
   default=DEFAULT_CONFIG_PATH,
   help="Darknet network configuration",
+)
+parser.add_argument(
+  "--data",
+  type=FileType("data"),
+  default=DEFAULT_DATA_PATH,
+  help="Darknet network data",
 )
 parser.add_argument(
   "--weights",
