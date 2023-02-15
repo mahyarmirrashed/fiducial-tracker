@@ -6,12 +6,12 @@ import os
 
 _CURRENT_FILE_PATH = str(os.path.dirname(os.path.realpath(__file__)))
 
+DEFAULT_VIDEO_STREAM_PORT = 5000
+DEFAULT_LOCATION_STREAM_PORT = 6000
+
 DEFAULT_CONFIG_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/yolov4.cfg"
 DEFAULT_DATA_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/coco.data"
 DEFAULT_WEIGHTS_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/yolov4.weights"
-
-DEFAULT_VIDEO_STREAM_PORT = 5000
-DEFAULT_LOCATION_STREAM_PORT = 6000
 
 parser = ArgumentParser(description="Fiducial tracking server.")
 
@@ -45,5 +45,6 @@ parser.add_argument(
   default=DEFAULT_WEIGHTS_PATH,
   help="Darknet network weights",
 )
+
 
 args = parser.parse_args()
