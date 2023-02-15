@@ -3,7 +3,9 @@ from typing import Any, Union
 
 
 class IntegerRangeType:
-  def __init__(self, lower=None, upper=None) -> None:
+  def __init__(
+    self, lower: Union[int, None] = None, upper: Union[int, None] = None
+  ) -> None:
     """Validates that a provided integer is within range. Behaves similar to range()."""
     if not IntegerRangeType._is_int_or_none(lower):
       raise ValueError("Lower bound must be None or an integer")
