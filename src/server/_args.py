@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from src.common import FileType, IntegerRangeType
+from src.common import FileType, FloatRangeType, IntegerRangeType
 
 import os
 
@@ -12,6 +12,8 @@ DEFAULT_LOCATION_STREAM_PORT = 6000
 DEFAULT_CONFIG_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/yolov4.cfg"
 DEFAULT_DATA_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/coco.data"
 DEFAULT_WEIGHTS_PATH = f"{_CURRENT_FILE_PATH}/darknet/cfg/yolov4.weights"
+
+DEFAULT_CONFIDENCE_THRESHOLD = 0.25
 
 parser = ArgumentParser(description="Fiducial tracking server.")
 
@@ -44,6 +46,12 @@ parser.add_argument(
   type=FileType("weights"),
   default=DEFAULT_WEIGHTS_PATH,
   help="Darknet network weights",
+)
+parser.add_argument(
+  "--confidence-threshold",
+  type=FloatRangeType(0, 1),
+  default=DEFAULT_CONFIDENCE_THRESHOLD,
+  help="Darknet network should remove detections below this threshold",
 )
 
 
