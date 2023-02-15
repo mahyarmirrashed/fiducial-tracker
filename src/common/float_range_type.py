@@ -4,12 +4,12 @@ from typing import Any, Union
 
 class FloatRangeType:
   def __init__(
-    self, lower: Union[float, None] = None, upper: Union[float, None] = None
+    self, lower: Union[int, float, None] = None, upper: Union[int, float, None] = None
   ) -> None:
     """Validates that a provided float is within range. Behaves similar to range()."""
-    if not FloatRangeType._is_float_or_none(lower):
+    if not FloatRangeType._is_number_or_none(lower):
       raise ValueError("Lower bound must be None or a float")
-    if not FloatRangeType._is_float_or_none(upper):
+    if not FloatRangeType._is_number_or_none(upper):
       raise ValueError("Upper bound must be None or a float")
 
     self._lower = lower
@@ -27,22 +27,22 @@ class FloatRangeType:
     return value
 
   @staticmethod
-  def _is_float_or_none(value: Union[float, None]) -> bool:
-    return value is None or isinstance(value, float)
+  def _is_number_or_none(value: Union[int, float, None]) -> bool:
+    return value is None or isinstance(value, (int, float))
 
   def _range_exception(self) -> ArgumentTypeError:
     if self._lower is None:
-      return ArgumentTypeError(f"Must be a float < {self._upper}")
+      return ArgumentTypeError(f"Must be a number < {self._upper}")
     elif self._upper is None:
-      return ArgumentTypeError(f"Must be a float >= {self._lower}")
+      return ArgumentTypeError(f"Must be a number >= {self._lower}")
     else:
-      return ArgumentTypeError(f"Must be a float in [{self._lower}, {self._upper})")
+      return ArgumentTypeError(f"Must be a number in [{self._lower}, {self._upper})")
 
-  def _within_lower_range(self, value: float) -> bool:
+  def _within_lower_range(self, value: Union[int, float]) -> bool:
     return self._lower is None or value >= self._lower
 
-  def _within_upper_range(self, value: float) -> bool:
+  def _within_upper_range(self, value: Union[int, float]) -> bool:
     return self._upper is None or value < self._upper
 
-  def _within_range(self, value: float) -> bool:
+  def _within_range(self, value: Union[int, float]) -> bool:
     return self._within_lower_range(value) and self._within_upper_range(value)
