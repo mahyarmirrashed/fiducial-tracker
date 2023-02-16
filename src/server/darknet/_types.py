@@ -1,5 +1,5 @@
 from ctypes import c_void_p
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from random import randrange
 from typing import Dict, List, Tuple
 
@@ -22,17 +22,17 @@ class BoundingBox:
     return xmin, ymin, xmax, ymax
 
 
+@dataclass(frozen=True)
 class Color:
-  def __init__(self) -> None:
-    self._r = randrange(0, 256)
-    self._g = randrange(0, 256)
-    self._b = randrange(0, 256)
+  r: int = field(default_factory=lambda: randrange(0, 256), init=False)
+  g: int = field(default_factory=lambda: randrange(0, 256), init=False)
+  b: int = field(default_factory=lambda: randrange(0, 256), init=False)
 
   def bgr(self) -> Tuple[int, int, int]:
-    return (self._b, self._g, self._r)
+    return (self.b, self.g, self.r)
 
   def rgb(self) -> Tuple[int, int, int]:
-    return (self._r, self._g, self._b)
+    return (self.r, self.g, self.b)
 
 
 class Network:
