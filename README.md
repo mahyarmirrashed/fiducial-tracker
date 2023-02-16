@@ -21,6 +21,6 @@ Create a new Anaconda environment and installed the required packages (commands 
 conda create -n fiducial-tracker python=3.8 -y
 conda activate fiducial-tracker
 conda install -c conda-forge mamba -y
-mamba install -c conda-forge pyzmq opencv typing-extensions -y
+mamba install -c conda-forge pyzmq opencv typing-extensions cachetools -y
 pip3 install ormsgpack qoi
 ```
