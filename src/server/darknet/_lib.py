@@ -1,5 +1,14 @@
-from ctypes import _NamedFuncPointer, CDLL, c_char_p, c_float, c_int, c_void_p, POINTER
-from typing import Any, Union
+from ctypes import (
+  _NamedFuncPointer,
+  CDLL,
+  c_char_p,
+  c_float,
+  c_int,
+  c_void_p,
+  pointer,
+  POINTER,
+)
+from typing import Any, List, Tuple, Union
 
 import os
 
@@ -9,7 +18,7 @@ from ._structures import (
   ImageStruct,
   MetadataStruct,
 )
-from ._types import Network
+from ._types import BoundingBox, Network, Prediction
 
 DEFAULT_NAME_POSIX = "libdarknet.so"
 DEFAULT_NAME_WINDOWS = "darknet.dll"
@@ -26,6 +35,52 @@ class Darknet:
       raise RuntimeError("Unsupported operating system")
 
     self._setup_bindings()
+
+  def _get_detections_from_image(
+    self,
+    network: Network,
+    image: ImageStruct,
+    threshold: float = 0.5,
+    hierarching_threshold: float = 0.5,
+  ) -> Tuple[List[DetectionStruct], int]:
+    _detection_count = pointer(c_int(0))
+    detections: List[DetectionStruct] = self._lib.get_network_boxes(
+      network.get(),
+      image.w,
+      image.h,
+      threshold,
+      hierarching_threshold,
+      None,
+      0,
+      _detection_count,
+      0,
+    )
+    detection_count: int = _detection_count[0]
+
+    return detections, detection_count
+
+  def _get_predictions_from_detections(
+    self,
+    detections: List[DetectionStruct],
+    detection_count: int,
+    class_names: List[str],
+  ) -> List[Prediction]:
+    valid_predictions: List[Prediction] = []
+
+    for i in range(detection_count):
+      for idx, class_name in enumerate(class_names):
+        if detections[i].prob[idx] > 0:
+          _bbox = detections[i].bbox
+          _confidence = detections[i].prob[idx]
+          valid_predictions.append(
+            Prediction(
+              class_name=str(class_name),
+              confidence=round(_confidence * 100, 2),
+              bounding_box=BoundingBox(x=_bbox.x, y=_bbox.y, w=_bbox.w, h=_bbox.h),
+            )
+          )
+
+    return valid_predictions
 
   def _load(self, path: str) -> None:
     self._lib = CDLL(path)
@@ -69,6 +124,31 @@ class Darknet:
     self._setup_binding(self._lib.network_predict_image, [c_void_p, ImageStruct], POINTER(c_float))  # fmt: skip
     self._setup_binding(self._lib.network_predict_image_letterbox, [c_void_p, ImageStruct], POINTER(c_float))  # fmt: skip
     self._setup_binding(self._lib.network_predict_batch,[c_void_p, ImageStruct, c_int, c_int, c_int, c_float, c_float, POINTER(c_int), c_int, c_int], POINTER(DetectionNumberPairStruct))  # fmt: skip
+
+  def get_predictions(
+    self,
+    network: Network,
+    image: ImageStruct,
+    threshold: float = 0.5,
+    hierarching_threshold: float = 0.5,
+    non_max_suppression: float = 0.45,
+  ) -> List[Prediction]:
+    detections, detection_count = self._get_detections_from_image(
+      network, image, threshold, hierarching_threshold
+    )
+
+    if non_max_suppression > 0:
+      self._lib.do_nms_sort(
+        detections, detection_count, len(network.get_class_names()), non_max_suppression
+      )
+
+    predictions = self._get_predictions_from_detections(
+      detections, detection_count, network.get_class_names()
+    )
+
+    self._lib.free_detections(detections, detection_count)
+
+    return sorted(predictions, key=lambda prediction: prediction.confidence)
 
   def get_network_height(self, network: Network) -> int:
     return self._lib.network_height(network.get())
