@@ -11,14 +11,6 @@ class BoundingBox:
   w: float
   h: float
 
-  def corners(self) -> Tuple[int, int, int, int]:
-    xmin = int(round(self.x - (self.w / 2)))
-    xmax = int(round(self.x + (self.w / 2)))
-    ymin = int(round(self.y - (self.h / 2)))
-    ymax = int(round(self.y + (self.h / 2)))
-
-    return xmin, ymin, xmax, ymax
-
 
 @dataclass(frozen=True)
 class Color:
