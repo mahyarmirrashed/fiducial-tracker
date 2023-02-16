@@ -23,6 +23,8 @@ from ._types import BoundingBox, Network, Prediction
 DEFAULT_NAME_POSIX = "libdarknet.so"
 DEFAULT_NAME_WINDOWS = "darknet.dll"
 
+COLOR_CHANNEL_COUNT = 3
+
 
 class _Darknet:
   def __init__(self) -> None:
@@ -125,6 +127,12 @@ class _Darknet:
     self._setup_binding(self._lib.network_predict_image_letterbox, [c_void_p, ImageStruct], POINTER(c_float))  # fmt: skip
     self._setup_binding(self._lib.network_predict_batch,[c_void_p, ImageStruct, c_int, c_int, c_int, c_float, c_float, POINTER(c_int), c_int, c_int], POINTER(DetectionNumberPairStruct))  # fmt: skip
 
+  def free_image_buffer(self, image_buffer: ImageStruct) -> None:
+    self._lib.free_image(image_buffer)
+
+  def get_image_buffer(self, network: Network) -> ImageStruct:
+    return self._lib.make_image(network.width, network.height, COLOR_CHANNEL_COUNT)
+
   def get_predictions(
     self,
     network: Network,
@@ -162,6 +170,9 @@ class _Darknet:
       height=self._lib.network_height(_network),
       class_names=[_metadata.names[i].decode("ascii") for i in range(_metadata.classes)],  # fmt: skip
     )
+
+  def load_image_buffer(self, image_buffer: ImageStruct, data: bytes) -> None:
+    self._lib.copy_image_from_bytes(image_buffer, data)
 
 
 darknet = _Darknet()
