@@ -3,8 +3,6 @@ from dataclasses import dataclass, field
 from random import randrange
 from typing import Dict, List, Tuple
 
-from ._structures import MetadataStruct
-
 
 @dataclass(frozen=True)
 class BoundingBox:
@@ -35,24 +33,20 @@ class Color:
     return (self.r, self.g, self.b)
 
 
+@dataclass(frozen=True)
 class Network:
-  def __init__(self, *, network: c_void_p, metadata: MetadataStruct) -> None:
-    self._network = network
-    self._class_names = [metadata.names[i].decode("ascii") for i in range(metadata.classes)]  # fmt: skip
-    self._class_colors = self._generate_class_colors(self._class_names)
+  network: c_void_p
+  width: int
+  height: int
+  class_names: List[str]
+  class_colors: Dict[str, Color] = field(init=False)
+
+  def __post_init__(self) -> None:
+    object.__setattr__(self, "class_colors", self._generate_colors(self.class_names))
 
   @staticmethod
-  def _generate_class_colors(names: List[str]) -> Dict[str, Color]:
+  def _generate_colors(names: List[str]) -> Dict[str, Color]:
     return {name: Color() for name in names}
-
-  def get(self) -> c_void_p:
-    return self._network
-
-  def get_class_colors(self) -> Dict[str, Color]:
-    return self._class_colors
-
-  def get_class_names(self) -> List[str]:
-    return self._class_names
 
 
 @dataclass

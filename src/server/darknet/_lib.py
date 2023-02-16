@@ -45,7 +45,7 @@ class _Darknet:
   ) -> Tuple[List[DetectionStruct], int]:
     _detection_count = pointer(c_int(0))
     detections: List[DetectionStruct] = self._lib.get_network_boxes(
-      network.get(),
+      network.network,
       image.w,
       image.h,
       threshold,
@@ -139,29 +139,28 @@ class _Darknet:
 
     if non_max_suppression > 0:
       self._lib.do_nms_sort(
-        detections, detection_count, len(network.get_class_names()), non_max_suppression
+        detections, detection_count, len(network.class_names), non_max_suppression
       )
 
     predictions = self._get_predictions_from_detections(
-      detections, detection_count, network.get_class_names()
+      detections, detection_count, network.class_names
     )
 
     self._lib.free_detections(detections, detection_count)
 
     return sorted(predictions, key=lambda prediction: prediction.confidence)
 
-  def get_network_height(self, network: Network) -> int:
-    return self._lib.network_height(network.get())
-
-  def get_network_width(self, network: Network) -> int:
-    return self._lib.network_width(network.get())
-
   def load(self, config_path: str, data_path: str, weights_path: str) -> Network:
+    _metadata = self._lib.load_meta(data_path.encode("ascii"))
+    _network = self._lib.load_network_custom(
+      config_path.encode("ascii"), weights_path.encode("ascii"), 0, 1
+    )
+
     return Network(
-      network=self._lib.load_network_custom(
-        config_path.encode("ascii"), weights_path.encode("ascii"), 0, 1
-      ),
-      metadata=self._lib.load_meta(data_path.encode("ascii")),
+      network=_network,
+      width=self._lib.network_width(_network),
+      height=self._lib.network_height(_network),
+      class_names=[_metadata.names[i].decode("ascii") for i in range(_metadata.classes)],  # fmt: skip
     )
 
 
