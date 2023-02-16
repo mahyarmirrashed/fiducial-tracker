@@ -44,8 +44,8 @@ class VideoReader:
     return self._fps
 
   @fps.setter
-  def fps(self, new_fps: Union[float, int]) -> None:
-    if not isinstance(new_fps, (float, int)):
+  def fps(self, new_fps: Union[int, float]) -> None:
+    if not isinstance(new_fps, (int, float)):
       raise TypeError("fps must be an integer or float")
     elif new_fps <= 0:
       raise ValueError("fps must be non-negative")
