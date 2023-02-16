@@ -1,1 +1,1 @@
-from ._lib import Darknet
+from ._lib import darknet
