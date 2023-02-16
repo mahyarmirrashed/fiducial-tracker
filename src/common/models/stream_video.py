@@ -18,6 +18,12 @@ class VideoStreamRequestMessage:
   bottom_left_corner: Point
   top_right_corner: Point
 
+  def get_view_height(self) -> int:
+    return abs(self.top_right_corner.y - self.bottom_left_corner.y)
+
+  def get_view_width(self) -> int:
+    return abs(self.top_right_corner.x - self.bottom_left_corner.x)
+
 
 @dataclass(frozen=True)
 class VideoStreamResponseMessage:
