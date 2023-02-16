@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple
 from ._structures import MetadataStruct
 
 
-@dataclass
+@dataclass(frozen=True)
 class BoundingBox:
   x: float
   y: float
