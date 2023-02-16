@@ -55,7 +55,7 @@ class Commmunicator:
         dataclasses.asdict(
           VideoStreamRequestMessage(
             camera_id=self._uuid,
-            encoded_frame=qoi.encode(frame),
+            frame_encoded=qoi.encode(frame),
             timestamp=datetime.datetime.now(),
             bottom_left_corner=self._bottom_left_corner,
             top_right_corner=self._top_right_corner,

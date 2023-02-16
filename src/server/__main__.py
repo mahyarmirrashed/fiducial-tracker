@@ -13,7 +13,7 @@ RECOMMENDED_FPS = 30
 try:
   with Communicator(args.location_stream_port, args.video_stream_port) as comms:
     while req := comms.recv_video_stream():
-      cv2.imshow("Camera stream", qoi.decode(req.encoded_frame))
+      cv2.imshow("Camera stream", qoi.decode(req.frame_encoded))
 
       comms.send_video_stream(RECOMMENDED_FPS)
 

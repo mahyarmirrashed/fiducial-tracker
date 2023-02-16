@@ -13,7 +13,7 @@ class VideoStreamRequestMessage:
   """Implements the VideoStream request message arguments."""
 
   camera_id: uuid.UUID
-  encoded_frame: bytes
+  frame_encoded: bytes
   timestamp: datetime.datetime
   bottom_left_corner: Point
   top_right_corner: Point
