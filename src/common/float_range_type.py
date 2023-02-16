@@ -16,15 +16,21 @@ class FloatRangeType:
       raise TypeError("Upper bound must be None or a number")
     if not FloatRangeType._is_number_or_none(decimals):
       raise TypeError("Number of decimals places must be None or a number")
+    if decimals is not None and decimals < 0:
+      raise ValueError("Number of decimals places must be non-negative")
 
     self._lower = lower
     self._upper = upper
+    self._decimals = decimals
 
   def __call__(self, arg: Any) -> float:
     try:
       value = float(arg)
     except ValueError:
       raise ArgumentTypeError("Must be a float")
+    else:
+      if self._decimals is not None:
+        value = round(value, int(self._decimals))
 
     if not self._within_range(value):
       raise self._range_exception()

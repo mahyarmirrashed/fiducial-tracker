@@ -49,7 +49,7 @@ parser.add_argument(
 )
 parser.add_argument(
   "--confidence-threshold",
-  type=FloatRangeType(0, 1),
+  type=FloatRangeType(0, 1, 2),
   default=DEFAULT_CONFIDENCE_THRESHOLD,
   help="Darknet network should remove detections below this threshold",
 )
