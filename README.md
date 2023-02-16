@@ -13,6 +13,8 @@ Using `darknet`, a computer vision framework, collect video streams from cameras
 
 Communication between cameras and server is accomplished using REQ/REP sockets. This is so that the server can regulate the input camera feed to reduce staleness of communicated frames from video streams.
 
+The `darknet` component connected with the `server` submodule interacts using single-threading on the server main loop. Later, multi-threading may be used to preprocess incoming frames ahead of time for object detection.
+
 ## Conda Environment
 
 Create a new Anaconda environment and installed the required packages (commands listed below).
