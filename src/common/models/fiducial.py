@@ -3,13 +3,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
-import uuid
-
 from .point import Point
 
 
 @dataclass
 class Fiducial:
-  id: uuid.UUID
+  id: str
   location: Point
   heading: Optional[int]
