@@ -1,4 +1,3 @@
-from pydantic import NonNegativeInt
 from types import TracebackType
 from typing import List, Optional, Union
 from typing_extensions import Self
@@ -10,14 +9,13 @@ from src.common.models import (
   VideoStreamResponseMessage,
 )
 
+import dataclasses
 import ormsgpack
 import zmq
 
 
 class Communicator:
-  def __init__(
-    self, location_stream_port: NonNegativeInt, video_stream_port: NonNegativeInt
-  ) -> None:
+  def __init__(self, location_stream_port: int, video_stream_port: int) -> None:
     """Communicator with fiducial tracker cameras and clients."""
     self._location_stream_port = location_stream_port
     self._video_stream_port = video_stream_port
@@ -49,13 +47,15 @@ class Communicator:
   def send_location_stream(self, fiducials: List[Fiducial]) -> None:
     self._location_stream_socket.send(
       ormsgpack.packb(
-        LocationStreamMessage(fiducials=fiducials).dict(),
+        dataclasses.asdict(LocationStreamMessage(fiducials=fiducials)),
       )
     )
 
-  def send_video_stream(self, recommended_fps: NonNegativeInt) -> None:
+  def send_video_stream(self, recommended_fps: int) -> None:
     self._video_stream_socket.send(
       ormsgpack.packb(
-        VideoStreamResponseMessage(recommended_fps=recommended_fps).dict()
+        dataclasses.asdict(
+          VideoStreamResponseMessage(recommended_fps=recommended_fps),
+        )
       )
     )

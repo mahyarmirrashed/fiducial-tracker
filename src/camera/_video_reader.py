@@ -1,4 +1,3 @@
-from pydantic import NonNegativeInt
 from types import TracebackType
 from typing import Generator, Union
 from typing_extensions import Self
@@ -11,7 +10,7 @@ DEFAULT_FPS = 30
 
 
 class VideoReader:
-  def __init__(self, src: Union[NonNegativeInt, str], fps: int = DEFAULT_FPS) -> None:
+  def __init__(self, src: Union[int, str], fps: int = DEFAULT_FPS) -> None:
     """Wrapper for OpenCV video reading interactions."""
     self._cap = cv.VideoCapture(src)
     self._fps = fps
@@ -41,11 +40,11 @@ class VideoReader:
     self._prev_frame_time = time.time()
 
   @property
-  def fps(self) -> NonNegativeInt:
+  def fps(self) -> int:
     return self._fps
 
   @fps.setter
-  def fps(self, new_fps: NonNegativeInt) -> None:
+  def fps(self, new_fps: int) -> None:
     if not isinstance(new_fps, (int, float)):
       raise TypeError("fps must be an integer or float")
     elif new_fps <= 0:

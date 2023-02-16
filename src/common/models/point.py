@@ -1,10 +1,9 @@
 """Defines a point model."""
 
-from pydantic import NonNegativeInt
-
-from ._frozen_model import FrozenModel
+from dataclasses import dataclass
 
 
-class Point(FrozenModel):
-  x: NonNegativeInt
-  y: NonNegativeInt
+@dataclass(frozen=True)
+class Point:
+  x: int
+  y: int

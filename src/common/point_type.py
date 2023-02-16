@@ -1,5 +1,4 @@
 from argparse import ArgumentTypeError
-from pydantic import NonNegativeInt
 from typing import Any
 
 from src.common.models import Point
@@ -15,4 +14,4 @@ class PointType:
     except:
       raise ArgumentTypeError('Coordinates must be in the "x,y" form')
     else:
-      return Point(x=NonNegativeInt(x), y=NonNegativeInt(y))
+      return Point(x=int(x), y=int(y))

@@ -1,6 +1,6 @@
 """Defines a fiducial model."""
 
-from pydantic import BaseModel, Field, NonNegativeInt
+from dataclasses import dataclass
 from typing import Optional
 
 import uuid
@@ -8,10 +8,8 @@ import uuid
 from .point import Point
 
 
-class Fiducial(BaseModel):
-  id: uuid.UUID = Field(..., allow_mutation=False)
+@dataclass
+class Fiducial:
+  id: uuid.UUID
   location: Point
-  heading: Optional[NonNegativeInt]
-
-  class Config:
-    validate_assignment = True
+  heading: Optional[int]

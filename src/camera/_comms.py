@@ -1,4 +1,3 @@
-from pydantic import NonNegativeInt
 from types import TracebackType
 from typing import List, Optional, Union
 from typing_extensions import Self
@@ -9,6 +8,7 @@ from src.common.models import (
   VideoStreamResponseMessage,
 )
 
+import dataclasses
 import datetime
 import numpy as np
 import ormsgpack
@@ -22,7 +22,7 @@ DEFAULT_TIMEOUT = 5_000  # milliseconds
 class Commmunicator:
   def __init__(
     self,
-    port: NonNegativeInt,
+    port: int,
     uuid: uuid.UUID,
     corners: List[Point],
   ) -> None:
@@ -52,13 +52,15 @@ class Commmunicator:
   def send(self, frame: np.ndarray) -> None:
     self._socket.send(
       ormsgpack.packb(
-        VideoStreamRequestMessage(
-          camera_id=self._uuid,
-          encoded_frame=qoi.encode(frame),
-          timestamp=datetime.datetime.now(),
-          bottom_left_corner=self._bottom_left_corner,
-          top_right_corner=self._top_right_corner,
-        ).dict()
+        dataclasses.asdict(
+          VideoStreamRequestMessage(
+            camera_id=self._uuid,
+            encoded_frame=qoi.encode(frame),
+            timestamp=datetime.datetime.now(),
+            bottom_left_corner=self._bottom_left_corner,
+            top_right_corner=self._top_right_corner,
+          )
+        )
       )
     )
 

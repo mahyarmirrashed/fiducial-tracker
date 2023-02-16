@@ -1,15 +1,15 @@
 """Defines the message protocol model for streaming video data."""
 
-from pydantic import NonNegativeInt
+from dataclasses import dataclass
 
 import datetime
 import uuid
 
-from ._base import BaseMessage
 from .point import Point
 
 
-class VideoStreamRequestMessage(BaseMessage):
+@dataclass(frozen=True)
+class VideoStreamRequestMessage:
   """Implements the VideoStream request message arguments."""
 
   camera_id: uuid.UUID
@@ -19,7 +19,8 @@ class VideoStreamRequestMessage(BaseMessage):
   top_right_corner: Point
 
 
-class VideoStreamResponseMessage(BaseMessage):
+@dataclass(frozen=True)
+class VideoStreamResponseMessage:
   """Implements the VideoStream response message arguments."""
 
-  recommended_fps: NonNegativeInt
+  recommended_fps: int

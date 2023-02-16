@@ -1,4 +1,3 @@
-from pydantic import NonNegativeInt
 from types import TracebackType
 from typing import Optional, Union
 from typing_extensions import Self
@@ -10,7 +9,7 @@ import zmq
 
 
 class Communicator:
-  def __init__(self, port: NonNegativeInt) -> None:
+  def __init__(self, port: int) -> None:
     """Communicator with fiducial tracker server."""
     self._port = port
 

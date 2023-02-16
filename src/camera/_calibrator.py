@@ -1,4 +1,3 @@
-from pydantic import NonNegativeInt
 from threading import Event, Thread
 from typing import List
 
@@ -45,7 +44,7 @@ class Calibrator:
         print('Error parsing coordinates in "x,y" form. Please try again.')
         print()
       else:
-        self._calibrated_point = Point(x=NonNegativeInt(x), y=NonNegativeInt(y))
+        self._calibrated_point = Point(x=int(x), y=int(y))
         break
 
     self._calibrated_event.set()
