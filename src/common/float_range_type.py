@@ -9,11 +9,11 @@ class FloatRangeType:
     upper: Union[int, float, None] = None,
     decimals: Union[int, float, None] = None,
   ) -> None:
-    """Validates that a provided float is within range. Behaves similar to range()."""
+    """Validates that a provided number is within range. Behaves similar to range()."""
     if not FloatRangeType._is_number_or_none(lower):
-      raise TypeError("Lower bound must be None or a float")
+      raise TypeError("Lower bound must be None or a number")
     if not FloatRangeType._is_number_or_none(upper):
-      raise TypeError("Upper bound must be None or a float")
+      raise TypeError("Upper bound must be None or a number")
     if not FloatRangeType._is_number_or_none(decimals):
       raise TypeError("Number of decimals places must be None or a number")
 
