@@ -161,3 +161,6 @@ cython_debug/
 
 # Video resources
 src/res/data/video/
+
+# Darknet configurations
+src/server/darknet/cfg/
