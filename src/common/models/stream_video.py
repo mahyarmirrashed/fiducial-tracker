@@ -29,4 +29,4 @@ class VideoStreamRequestMessage:
 class VideoStreamResponseMessage:
   """Implements the VideoStream response message arguments."""
 
-  recommended_fps: int
+  recommended_fps: float

@@ -40,17 +40,17 @@ class VideoReader:
     self._prev_frame_time = time.time()
 
   @property
-  def fps(self) -> int:
+  def fps(self) -> float:
     return self._fps
 
   @fps.setter
-  def fps(self, new_fps: int) -> None:
-    if not isinstance(new_fps, (int, float)):
+  def fps(self, new_fps: Union[float, int]) -> None:
+    if not isinstance(new_fps, (float, int)):
       raise TypeError("fps must be an integer or float")
     elif new_fps <= 0:
       raise ValueError("fps must be non-negative")
     else:
-      self._fps = new_fps
+      self._fps = float(new_fps)
 
   def frames(self) -> Generator[np.ndarray, None, None]:
     prev = 0

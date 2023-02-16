@@ -51,11 +51,11 @@ class Communicator:
       )
     )
 
-  def send_video_stream(self, recommended_fps: int) -> None:
+  def send_video_stream(self, recommended_fps: Union[float, int]) -> None:
     self._video_stream_socket.send(
       ormsgpack.packb(
         dataclasses.asdict(
-          VideoStreamResponseMessage(recommended_fps=recommended_fps),
+          VideoStreamResponseMessage(recommended_fps=float(recommended_fps)),
         )
       )
     )
