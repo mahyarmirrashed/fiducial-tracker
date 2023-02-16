@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 from ctypes import c_void_p
 from dataclasses import dataclass, field
 from random import randrange
 from typing import Dict, List, Tuple
+from typing_extensions import Self
 
 
 @dataclass(frozen=True)
@@ -10,6 +13,22 @@ class BoundingBox:
   y: float
   w: float
   h: float
+
+  def normalize_to(self, width: int, height: int) -> Self:
+    return BoundingBox(
+      x=self.x / width,
+      y=self.y / height,
+      w=self.w / width,
+      h=self.h / height,
+    )
+
+  def scale_to(self, width: int, height: int) -> Self:
+    return BoundingBox(
+      x=int(self.x * width),
+      y=int(self.y * height),
+      w=int(self.w * width),
+      h=int(self.h * height),
+    )
 
 
 @dataclass(frozen=True)
