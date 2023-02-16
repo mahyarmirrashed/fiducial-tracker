@@ -38,7 +38,7 @@ class Color:
 class Network:
   def __init__(self, *, network: c_void_p, metadata: MetadataStruct) -> None:
     self._network = network
-    self._class_names = list(map(lambda name: name.decode("ascii"), metadata.names))
+    self._class_names = [metadata.names[i].decode("ascii") for i in range(metadata.classes)]  # fmt: skip
     self._class_colors = self._generate_class_colors(self._class_names)
 
   @staticmethod

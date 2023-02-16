@@ -20,3 +20,4 @@
   - [ ] Server should have port to enable/disable tracking certain fiducial;
     - [ ] Information may be provided from UI component;
     - [ ] Authentication pathway on that gateway (optional);
+- [ ] Refactor `darknet` module to use Pythonic syntax
