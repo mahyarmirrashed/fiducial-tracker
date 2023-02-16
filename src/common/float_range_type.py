@@ -8,9 +8,9 @@ class FloatRangeType:
   ) -> None:
     """Validates that a provided float is within range. Behaves similar to range()."""
     if not FloatRangeType._is_number_or_none(lower):
-      raise ValueError("Lower bound must be None or a float")
+      raise TypeError("Lower bound must be None or a float")
     if not FloatRangeType._is_number_or_none(upper):
-      raise ValueError("Upper bound must be None or a float")
+      raise TypeError("Upper bound must be None or a float")
 
     self._lower = lower
     self._upper = upper
