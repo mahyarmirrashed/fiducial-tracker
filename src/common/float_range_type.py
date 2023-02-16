@@ -4,13 +4,18 @@ from typing import Any, Union
 
 class FloatRangeType:
   def __init__(
-    self, lower: Union[int, float, None] = None, upper: Union[int, float, None] = None
+    self,
+    lower: Union[int, float, None] = None,
+    upper: Union[int, float, None] = None,
+    decimals: Union[int, float, None] = None,
   ) -> None:
     """Validates that a provided float is within range. Behaves similar to range()."""
     if not FloatRangeType._is_number_or_none(lower):
       raise TypeError("Lower bound must be None or a float")
     if not FloatRangeType._is_number_or_none(upper):
       raise TypeError("Upper bound must be None or a float")
+    if not FloatRangeType._is_number_or_none(decimals):
+      raise TypeError("Number of decimals places must be None or a number")
 
     self._lower = lower
     self._upper = upper
