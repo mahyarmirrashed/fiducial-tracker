@@ -30,6 +30,11 @@ parser.add_argument(
   help="Show processed frames from video streams with bounding boxes",
 )
 parser.add_argument(
+  "--save-raw-frames",
+  action="store_true",
+  help="Stored the raw frames from video streams",
+)
+parser.add_argument(
   "--save-processed-frames",
   action="store_true",
   help="Store the processed frames from video streams with bounding boxes",
