@@ -1,5 +1,54 @@
 
 
+## [0.10.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.9.0...0.10.0) (2023-02-17)
+
+
+### Features
+
+* add ability to load network from files ([eb6e037](https://github.com/mahyarmirrashed/fiducial-tracker/commit/eb6e037b75055ca8e24e143a1be24798816e2fd6))
+* add bindings to shared library methods ([1f15523](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1f155238c5590818e91fa835b85eb907adca0d78))
+* add bounding box structure ([70878e6](https://github.com/mahyarmirrashed/fiducial-tracker/commit/70878e6654032ffa97641f3cc8ab98973159ff5a))
+* add detection and count pair structure ([bd791b6](https://github.com/mahyarmirrashed/fiducial-tracker/commit/bd791b6a5118154029afc4b2af80c63ae986a9aa))
+* add float range class ([e3975e2](https://github.com/mahyarmirrashed/fiducial-tracker/commit/e3975e23306aba1cedfe84b779dab7af6c0a8ca8))
+* add image structure ([c8c0af7](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c8c0af75353d5443de31c43db8c720e223d51a3f))
+* add methods for accessing network height and width ([0d23fc2](https://github.com/mahyarmirrashed/fiducial-tracker/commit/0d23fc2da520078069e788342e5201c6ed5f0012))
+* add network class for encapsulating resource and metadata ([128f355](https://github.com/mahyarmirrashed/fiducial-tracker/commit/128f355830e770535d143151af56d6c3a3a29277))
+* add network classes metadata structure ([5d49c3d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/5d49c3d400af82a2ca5dd824bfa00dfbc28e7c8e))
+* add object detection structure ([9750013](https://github.com/mahyarmirrashed/fiducial-tracker/commit/97500135109c645dffc24f2742df5e556d775912))
+* add parameter for setting number of decimal places ([41f9a92](https://github.com/mahyarmirrashed/fiducial-tracker/commit/41f9a92664ef757adbb9c1442e315aaeb376d5ce))
+* add timing out on `recv` calls ([b75b91d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/b75b91d1db6de1d97401e6159aadd23b9d4f30cb))
+* allow passing file type as single string parameter ([6c6f7ed](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6c6f7ed3456732342d108f48fac73863ce5b2de0))
+* convert to `darknet` module ([1257604](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1257604acdab92a9efb19952958e3dbfa1f09ad5))
+* create library class for interfacing with `darknet` library ([27c8d7c](https://github.com/mahyarmirrashed/fiducial-tracker/commit/27c8d7c1497ff1d4bf0deafaa83b5a856c52326e))
+* **darknet:** add ability to get predictions from the model on an image ([0632412](https://github.com/mahyarmirrashed/fiducial-tracker/commit/06324128a6fbe7425cbaba22ae28466057dd6f79))
+* **darknet:** add normalizing and scaling abilities for bounding boxes ([03f454f](https://github.com/mahyarmirrashed/fiducial-tracker/commit/03f454fe82df66440003b14a6587cb931d681061))
+* **models:** add helper methods for calculating view width and height from corners ([8ca728d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/8ca728d06bfc8bb8cd8ca0d6738bd8bdf40757fb))
+* only make instance of darknet library public ([78e0336](https://github.com/mahyarmirrashed/fiducial-tracker/commit/78e03362df77c92acf30e4b85e31ab0fe3d824fb))
+* round float range type to specified number of decimal places ([5d543d3](https://github.com/mahyarmirrashed/fiducial-tracker/commit/5d543d376cdeb84fd021265a7eaa7a47486660ef))
+* **server:** add ability to create image detection buffer ([09aeb93](https://github.com/mahyarmirrashed/fiducial-tracker/commit/09aeb935a39a218077eee2ccbb273e33a8e30b4d))
+* **server:** add ability to set darknet threshold confidence ([866b03b](https://github.com/mahyarmirrashed/fiducial-tracker/commit/866b03b34642d7fb3c080336abf9a506139dbea2))
+* **server:** add arguments for displaying and saving raw/processed frames ([bef3cfb](https://github.com/mahyarmirrashed/fiducial-tracker/commit/bef3cfb4f930e8f75aacac772b5572ac4de3a784))
+* **server:** add configuration file argument ([966c98e](https://github.com/mahyarmirrashed/fiducial-tracker/commit/966c98e5e431f48a82690b9a158a825e33007bef))
+* **server:** add data file argument ([f8c8594](https://github.com/mahyarmirrashed/fiducial-tracker/commit/f8c8594bca9ad4f84ef204ff9c042505e23bb2c5))
+* **server:** add single-threaded inferencing using `darknet` interface ([f09035e](https://github.com/mahyarmirrashed/fiducial-tracker/commit/f09035eabc3ae34e26f1c4137181990bbe457f9e))
+* **server:** add weights argument ([11dc5b3](https://github.com/mahyarmirrashed/fiducial-tracker/commit/11dc5b389856b8db23f404cfec4df2a5c2e109f3))
+* **server:** allow recommended fps to be a float ([f5a0f85](https://github.com/mahyarmirrashed/fiducial-tracker/commit/f5a0f85bbb2e68de9ca6de761cfcea4fa0bb8cdd))
+
+
+### Bug Fixes
+
+* enable passing integers as arguments ([6083e9d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6083e9d92d8a9cae7eee2056b8e96b7664938c90))
+* make bounding box dataclass frozen ([dafe515](https://github.com/mahyarmirrashed/fiducial-tracker/commit/dafe51534615c3aed2944715fc4c7371b9798b72))
+* make float range type visible to other modules ([3e54408](https://github.com/mahyarmirrashed/fiducial-tracker/commit/3e54408201770ece5e4f32a670b3a98310120c76))
+* should raise `TypeError` instead of `ValueError` ([eefd584](https://github.com/mahyarmirrashed/fiducial-tracker/commit/eefd5844cb49f94a35486252a9bb47c95b46cb6d))
+* use strings as identifiers ([0c98aaa](https://github.com/mahyarmirrashed/fiducial-tracker/commit/0c98aaa991ee9e9be59fc171676e7c2aff1653fe))
+
+
+### Reverts
+
+* remove conversion of bounding box values to cv2 rectangle corners ([1b5912c](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1b5912c64c19b4087dca728f184542eca094cdd6))
+* use original index-based method until can test properly ([ba7fd9e](https://github.com/mahyarmirrashed/fiducial-tracker/commit/ba7fd9e128d2728e7c0d0711dd513cef4ab4b0c4))
+
 ## [0.9.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.8.0...0.9.0) (2023-02-07)
 
 
