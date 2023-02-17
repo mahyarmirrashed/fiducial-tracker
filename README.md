@@ -7,13 +7,11 @@
   <img src="https://img.shields.io/tokei/lines/github/mahyarmirrashed/fiducial-tracker" alt="Total repo lines" />
 </p>
 
-Using `darknet`, a computer vision framework, collect video streams from cameras, analyze for fiducials, and publish tracked fiducial locations to listening receivers. The server acts as a broker service that distributes analysis workload to `darknet` computer vision workers, and then periodically publishes tracked results to receivers. A diagram of the architecture is shown below.
+An array of cameras sends video streams to the server module. There, the server, using `pyzbar`, a QR code scanning library, analyzes for QR code fiducials, and published their tracked locations to listening clients.
 
 ![](res/architecture.png)
 
 Communication between cameras and server is accomplished using REQ/REP sockets. This is so that the server can regulate the input camera feed to reduce staleness of communicated frames from video streams.
-
-The `darknet` component connected with the `server` submodule interacts using single-threading on the server main loop. Later, multi-threading may be used to preprocess incoming frames ahead of time for object detection.
 
 ## Conda Environment
 
