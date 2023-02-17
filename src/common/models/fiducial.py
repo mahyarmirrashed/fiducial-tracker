@@ -1,7 +1,6 @@
 """Defines a fiducial model."""
 
 from dataclasses import dataclass
-from typing import Optional
 
 from .point import Point
 
@@ -10,4 +9,3 @@ from .point import Point
 class Fiducial:
   id: str
   location: Point
-  heading: Optional[int]
