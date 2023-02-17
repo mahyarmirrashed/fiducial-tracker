@@ -72,6 +72,21 @@ try:
           location=Point(x=bbox.left + bbox.width // 2, y=bbox.top + bbox.height // 2),
         )
 
+        if args.display_processed_frames:
+          cv.rectangle(
+            frame,
+            (bbox.left, bbox.top),
+            (bbox.left + bbox.width, bbox.top + bbox.height),
+            (0, 0, 255),
+            1,
+          )
+
+      if args.display_processed_frames:
+        cv.imshow("Camera stream (processed)", frame)
+
+        if cv.waitKey(1) & 0xFF == ord("q"):
+          break
+
       recommended_fps = 1 / (time.time() - start)
       recommended_fps_balanced = recommended_fps / len(camera_cache)
 
