@@ -57,6 +57,12 @@ try:
 
       frame = qoi.decode(req.frame_encoded)
 
+      if args.display_raw_frames:
+        cv.imshow("Camera stream (raw)", frame)
+
+        if cv.waitKey(1) & 0xFF == ord("q"):
+          break
+
       for obj in pyzbar.decode(frame):
         bbox: Rect = obj.rect
         identifier = obj.data.decode("utf-8")
