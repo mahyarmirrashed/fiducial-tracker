@@ -1,5 +1,8 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
 from cachetools import TTLCache
+from pyzbar import pyzbar
+from pyzbar.locations import Rect
+from pyzbar.pyzbar import Decoded
 from typing import Union
 
 from src.common import display
@@ -7,66 +10,69 @@ from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 
 from ._args import args
 from ._comms import Communicator
-from ._delta_tracker import time_since_last_call
-from .darknet import darknet
 
 import cv2 as cv
 import qoi
-import uuid
-
-DEFAULT_FIDUCIAL_ID = ""
-RECOMMENDED_FPS = 30
+import socket
+import time
 
 
-camera_cache: TTLCache[uuid.UUID, None] = TTLCache(maxsize=100, ttl=60)
-fiducial_cache: TTLCache[str, Fiducial] = TTLCache(maxsize=10, ttl=5)
+DEFAULT_RECOMMENDED_FPS = 300
 
-delta_tracker = time_since_last_call()
 
-network = darknet.load(args.config, args.data, args.weights)
-network_image_buffer = darknet.get_image_buffer(network)
+camera_cache = TTLCache(maxsize=100, ttl=30)
+fiducial_cache = TTLCache(maxsize=10, ttl=5)
 
+decoder = lambda obj: obj.data.decode("utf-8")
+
+obj: Decoded
 req: Union[VideoStreamRequestMessage, None]
 
+
+def display_diagnostics(*, running: bool) -> None:
+  lan_ip_address = socket.gethostbyname(socket.getfqdn())
+  server_state = f"\033[1mServer is [{'RUNNING' if running else 'STOPPED'}]:\033[0;0m"
+
+  display(
+    f"""{server_state}
+  Video stream address:     {lan_ip_address}:{args.video_stream_port}
+  Location stream address:  {lan_ip_address}:{args.location_stream_port}
+  
+  Display raw frames:       {"Yes" if args.display_raw_frames else "No"}
+  Display processed frames: {"Yes" if args.display_processed_frames else "No"}
+  Save raw frames:          {"Yes" if args.save_raw_frames else "No"}
+  Save processed frames:    {"Yes" if args.save_processed_frames else "No"}"""
+  )
+
+
 try:
+  display_diagnostics(running=True)
+
   with Communicator(args.location_stream_port, args.video_stream_port) as comms:
     while req := comms.recv_video_stream():
+      # log connected camera uuid
       camera_cache[req.camera_id] = None
 
+      start = time.time()
+
       frame = qoi.decode(req.frame_encoded)
-      frame_rgb = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
-      frame_rsz = cv.resize(
-        frame_rgb, (network.width, network.height), interpolation=cv.INTER_LINEAR
-      )
 
-      darknet.load_image_buffer(network_image_buffer, frame_rsz.tobytes())
-      predictions = darknet.get_predictions(
-        network, network_image_buffer, threshold=args.confidence_threshold
-      )
+      for obj in pyzbar.decode(frame):
+        bbox: Rect = obj.rect
+        identifier = obj.data.decode("utf-8")
 
-      for prediction in predictions:
-        prediction.bounding_box = prediction.bounding_box.normalize_to(
-          network.width,
-          network.height,
-        ).scale_to(
-          req.get_view_width(),
-          req.get_view_height(),
+        fiducial_cache[identifier] = Fiducial(
+          id=identifier,
+          location=Point(x=bbox.left + bbox.width // 2, y=bbox.top + bbox.height // 2),
         )
 
-      if len(predictions) > 0:
-        bounding_box = predictions[0].bounding_box
-
-        fiducial_cache[DEFAULT_FIDUCIAL_ID] = Fiducial(
-          DEFAULT_FIDUCIAL_ID,
-          location=Point(x=int(bounding_box.x), y=int(bounding_box.y)),
-          heading=None,
-        )
-
-      recommended_fps = 1 / next(time_since_last_call())
+      recommended_fps = 1 / (time.time() - start)
       recommended_fps_balanced = recommended_fps / len(camera_cache)
 
       comms.send_video_stream(recommended_fps_balanced)
 except KeyboardInterrupt:
-  display("Server is exiting...")
+  pass
 finally:
-  darknet.free_image_buffer(network_image_buffer)
+  display_diagnostics(running=False)
+
+  cv.destroyAllWindows()
