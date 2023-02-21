@@ -13,6 +13,7 @@ from ._comms import Communicator
 from ._utils import draw_rectangle
 
 import cv2 as cv
+import numpy as np
 import qoi
 import socket
 import time
@@ -56,7 +57,7 @@ try:
 
       start = time.time()
 
-      frame = qoi.decode(req.frame_encoded)
+      frame: np.ndarray = qoi.decode(req.frame_encoded)
 
       if args.display_raw_frames:
         cv.imshow("Camera stream (raw)", frame)
