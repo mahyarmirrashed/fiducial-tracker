@@ -1,5 +1,22 @@
 
 
+## [0.11.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.10.0...0.11.0) (2023-02-21)
+
+
+### Features
+
+* add `pyzbar` for qr code fiducial detection ([4fef12c](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4fef12c45eb40402569571de2d4535c63d85555d))
+* add ability to save raw frames ([1918ba5](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1918ba5e803b49cc5a350258e5a3c246c684e747))
+* add ability to view processed frames ([12a3083](https://github.com/mahyarmirrashed/fiducial-tracker/commit/12a3083b036cb0861f73bd0729db8776ca7395ee))
+* add condition for showing raw frames ([20b12e9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/20b12e9463e8a123b140bbe3e22319c2c652215c))
+
+
+### Bug Fixes
+
+* **camera:** enable direct show opencv backend ([c7d9d63](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c7d9d6349076baa13723a56e0d7ab46947ff8e8e))
+* disable ability to break using `q` key ([91b651b](https://github.com/mahyarmirrashed/fiducial-tracker/commit/91b651bd2d107490c23de1a4c9699b378bde3016))
+* only time between receiving message and fully processing it ([6271c81](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6271c815059d54ee14f606426c229b7a2c76895f))
+
 ## [0.10.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.9.0...0.10.0) (2023-02-17)
 
 
