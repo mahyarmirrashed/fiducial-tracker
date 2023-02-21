@@ -16,7 +16,7 @@ class VideoReader:
     self._cap = self._get_capture(src)
     self._fps = fps
 
-    self._prev_frame_time = 0
+    self._prev_frame_time = 0.0
 
     if self._cap is None or not self._cap.isOpened():
       raise ValueError(f"Unable to open video source: {src}")
