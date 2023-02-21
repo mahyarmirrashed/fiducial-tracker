@@ -45,7 +45,7 @@ class Calibrator:
         print('Error parsing coordinates in "x,y" form. Please try again.')
         print()
       else:
-        self._calibrated_point = Point(x=int(x), y=int(y))
+        self._calibrated_point = Point(x=x, y=y)
         break
 
     self._calibrated_event.set()

@@ -14,4 +14,4 @@ class PointType:
     except:
       raise ArgumentTypeError('Coordinates must be in the "x,y" form')
     else:
-      return Point(x=int(x), y=int(y))
+      return Point(x=x, y=y)
