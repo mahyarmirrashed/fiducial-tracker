@@ -10,6 +10,7 @@ from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 
 from ._args import args
 from ._comms import Communicator
+from ._utils import draw_rectangle
 
 import cv2 as cv
 import qoi
@@ -71,12 +72,10 @@ try:
         )
 
         if args.display_processed_frames:
-          cv.rectangle(
-            frame,
-            (bbox.left, bbox.top),
-            (bbox.left + bbox.width, bbox.top + bbox.height),
-            (0, 0, 255),
-            1,
+          draw_rectangle(
+            frame=frame,
+            topleft=(bbox.left, bbox.top),
+            bottomright=(bbox.left + bbox.width, bbox.top + bbox.height),
           )
 
       if args.display_processed_frames:
