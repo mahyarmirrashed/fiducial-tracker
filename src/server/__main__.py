@@ -19,9 +19,6 @@ import socket
 import time
 
 
-DEFAULT_RECOMMENDED_FPS = 300
-
-
 camera_cache = TTLCache(maxsize=100, ttl=30)
 fiducial_cache = TTLCache(maxsize=10, ttl=5)
 
