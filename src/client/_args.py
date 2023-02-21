@@ -5,9 +5,9 @@ from src.common import IntegerRangeType
 _DEFAULT_LOCATION_STREAM_PORT = 6000
 
 
-parser = ArgumentParser(description="Fiducial tracker client.")
+_parser = ArgumentParser(description="Fiducial tracker client.")
 
-parser.add_argument(
+_parser.add_argument(
   "-p",
   "--port",
   type=IntegerRangeType(1024, 65536),
@@ -15,4 +15,4 @@ parser.add_argument(
   help="Port number for collecting tracked fiducial locations",
 )
 
-args = parser.parse_args()
+args = _parser.parse_args()
