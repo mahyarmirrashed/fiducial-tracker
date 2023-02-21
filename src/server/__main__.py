@@ -59,9 +59,7 @@ try:
 
       if args.display_raw_frames:
         cv.imshow("Camera stream (raw)", frame)
-
-        if cv.waitKey(1) & 0xFF == ord("q"):
-          break
+        cv.waitKey(1)
 
       for obj in pyzbar.decode(frame):
         bbox: Rect = obj.rect
@@ -83,9 +81,7 @@ try:
 
       if args.display_processed_frames:
         cv.imshow("Camera stream (processed)", frame)
-
-        if cv.waitKey(1) & 0xFF == ord("q"):
-          break
+        cv.waitKey(1)
 
       recommended_fps = 1 / (time.time() - start)
       recommended_fps_balanced = recommended_fps / len(camera_cache)
