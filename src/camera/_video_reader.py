@@ -1,3 +1,4 @@
+import sys
 import time
 from types import TracebackType
 from typing import Generator, Union
@@ -12,7 +13,7 @@ _DEFAULT_FPS = 30
 class VideoReader:
   def __init__(self, src: Union[int, str], fps: int = _DEFAULT_FPS) -> None:
     """Wrapper for OpenCV video reading interactions."""
-    self._cap = cv.VideoCapture(src, cv.CAP_DSHOW)
+    self._cap = self._get_capture(src)
     self._fps = fps
 
     self._prev_frame_time = 0
@@ -30,6 +31,11 @@ class VideoReader:
     traceback: Union[TracebackType, None],
   ) -> None:
     self._cap.release()
+
+  def _get_capture(self, src: Union[int, str]) -> cv.VideoCapture:
+    if "linux" in sys.platform:
+      return cv.VideoCapture(src)
+    return cv.VideoCapture(src, cv.CAP_DSHOW)
 
   def _regulate_fps(self) -> None:
     elapsed_time = time.time() - self._prev_frame_time
