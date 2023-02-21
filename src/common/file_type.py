@@ -1,7 +1,6 @@
+import os
 from argparse import ArgumentTypeError
 from typing import Any, List, Union
-
-import os
 
 
 class FileType:

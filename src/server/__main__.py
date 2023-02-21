@@ -1,9 +1,15 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
+import socket
+import time
+from typing import Union
+
+import cv2 as cv
+import numpy as np
+import qoi
 from cachetools import TTLCache
 from pyzbar import pyzbar
 from pyzbar.locations import Rect
 from pyzbar.pyzbar import Decoded
-from typing import Union
 
 from src.common import display
 from src.common.models import Fiducial, Point, VideoStreamRequestMessage
@@ -11,13 +17,6 @@ from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 from ._args import args
 from ._comms import Communicator
 from ._utils import draw_rectangle
-
-import cv2 as cv
-import numpy as np
-import qoi
-import socket
-import time
-
 
 camera_cache = TTLCache(maxsize=100, ttl=30)
 fiducial_cache = TTLCache(maxsize=10, ttl=5)

@@ -1,12 +1,12 @@
 from threading import Event, Thread
 from typing import List
 
+import cv2 as cv
+
 from src.common import display
 from src.common.models import Point
 
 from ._video_reader import VideoReader
-
-import cv2 as cv
 
 
 class Calibrator:

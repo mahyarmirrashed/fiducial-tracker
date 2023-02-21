@@ -1,5 +1,9 @@
+import dataclasses
 from types import TracebackType
 from typing import List, Optional, Union
+
+import ormsgpack
+import zmq
 from typing_extensions import Self
 
 from src.common.models import (
@@ -8,10 +12,6 @@ from src.common.models import (
   VideoStreamRequestMessage,
   VideoStreamResponseMessage,
 )
-
-import dataclasses
-import ormsgpack
-import zmq
 
 
 class Communicator:

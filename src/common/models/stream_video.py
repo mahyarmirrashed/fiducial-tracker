@@ -1,9 +1,8 @@
 """Defines the message protocol model for streaming video data."""
 
-from dataclasses import dataclass
-
 import datetime
 import uuid
+from dataclasses import dataclass
 
 from .point import Point
 

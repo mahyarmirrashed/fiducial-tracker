@@ -1,11 +1,11 @@
 from types import TracebackType
 from typing import Optional, Union
-from typing_extensions import Self
-
-from src.common.models import LocationStreamMessage
 
 import ormsgpack
 import zmq
+from typing_extensions import Self
+
+from src.common.models import LocationStreamMessage
 
 
 class Communicator:

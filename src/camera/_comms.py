@@ -1,5 +1,13 @@
+import dataclasses
+import datetime
+import uuid
 from types import TracebackType
 from typing import List, Optional, Union
+
+import numpy as np
+import ormsgpack
+import qoi
+import zmq
 from typing_extensions import Self
 
 from src.common.models import (
@@ -7,14 +15,6 @@ from src.common.models import (
   VideoStreamRequestMessage,
   VideoStreamResponseMessage,
 )
-
-import dataclasses
-import datetime
-import numpy as np
-import ormsgpack
-import qoi
-import uuid
-import zmq
 
 _DEFAULT_TIMEOUT = 5_000  # milliseconds
 

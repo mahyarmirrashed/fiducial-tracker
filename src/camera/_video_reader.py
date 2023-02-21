@@ -1,10 +1,10 @@
+import time
 from types import TracebackType
 from typing import Generator, Union
-from typing_extensions import Self
 
 import cv2 as cv
 import numpy as np
-import time
+from typing_extensions import Self
 
 _DEFAULT_FPS = 30
 
