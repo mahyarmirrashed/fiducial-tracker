@@ -11,7 +11,7 @@ _DEFAULT_FPS = 30
 
 
 class VideoReader:
-  def __init__(self, src: Union[int, str], fps: int = _DEFAULT_FPS) -> None:
+  def __init__(self, src: Union[int, str], fps: Union[int, float] = _DEFAULT_FPS) -> None:
     """Wrapper for OpenCV video reading interactions."""
     self._cap = self._get_capture(src)
     self._fps = fps
