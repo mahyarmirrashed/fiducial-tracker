@@ -55,7 +55,7 @@ try:
       # log connected camera uuid
       camera_cache[req.camera_id] = None
 
-      start = time.time()
+      processing_start_time = time.time()
 
       frame: np.ndarray = qoi.decode(req.frame_encoded)
 
@@ -83,7 +83,7 @@ try:
         cv.imshow("Camera stream (processed)", frame)
         cv.waitKey(1)
 
-      recommended_fps = 1 / (time.time() - start)
+      recommended_fps = 1 / (time.time() - processing_start_time)
       recommended_fps_balanced = recommended_fps / len(camera_cache)
 
       comms.send_video_stream(recommended_fps_balanced)
