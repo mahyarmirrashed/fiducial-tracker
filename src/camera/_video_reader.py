@@ -59,7 +59,6 @@ class VideoReader:
       self._fps = float(new_fps)
 
   def frames(self) -> Generator[np.ndarray, None, None]:
-    prev = 0
     retval, image = self._cap.read()
 
     while retval:
