@@ -2,8 +2,8 @@ from argparse import ArgumentParser
 
 from src.common import FileType, IntegerRangeType, PointType
 
-ALLOWABLE_VIDEO_TYPES = ["mp4", "webm"]
-DEFAULT_VIDEO_STREAM_PORT = 5000
+_ALLOWABLE_VIDEO_TYPES = ["mp4", "webm"]
+_DEFAULT_VIDEO_STREAM_PORT = 5000
 
 parser = ArgumentParser(description="Fiducial tracker camera.")
 
@@ -11,7 +11,7 @@ parser.add_argument(
   "-p",
   "--port",
   type=IntegerRangeType(1024, 65536),
-  default=DEFAULT_VIDEO_STREAM_PORT,
+  default=_DEFAULT_VIDEO_STREAM_PORT,
   help="Port number for publishing captured video stream",
 )
 
@@ -20,8 +20,8 @@ group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument(
   "-i",
   "--input",
-  type=FileType(ALLOWABLE_VIDEO_TYPES),
-  help=f"Path to video file (e.g. {ALLOWABLE_VIDEO_TYPES})",
+  type=FileType(_ALLOWABLE_VIDEO_TYPES),
+  help=f"Path to video file (e.g. {_ALLOWABLE_VIDEO_TYPES})",
 )
 group.add_argument(
   "-c",

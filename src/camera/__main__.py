@@ -8,7 +8,7 @@ from ._calibrator import Calibrator
 from ._comms import Commmunicator
 from ._video_reader import VideoReader
 
-CAMERA_ID = uuid4()
+_CAMERA_ID = uuid4()
 
 
 if args.camera is not None and args.corners is None:
@@ -17,8 +17,8 @@ if args.camera is not None and args.corners is None:
 
 try:
   with VideoReader(args.src) as video_reader:
-    with Commmunicator(args.port, CAMERA_ID, args.corners) as comms:
-      display(f"Camera ({CAMERA_ID}) is streaming video...")
+    with Commmunicator(args.port, _CAMERA_ID, args.corners) as comms:
+      display(f"Camera ({_CAMERA_ID}) is streaming video...")
 
       for frame in video_reader.frames():
         comms.send(frame)
@@ -26,4 +26,4 @@ try:
         if res := comms.recv():
           video_reader.fps = res.recommended_fps
 except KeyboardInterrupt:
-  display(f"Camera ({CAMERA_ID}) is exiting...")
+  display(f"Camera ({_CAMERA_ID}) is exiting...")
