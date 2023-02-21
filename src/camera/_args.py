@@ -34,7 +34,7 @@ _parser.add_argument(
   "--corners",
   type=PointType(),
   nargs=2,
-  help="Corners (bottom_left, top_right) in real world coordinates",
+  help="Corners (top_left, bottom_right) in real world coordinates",
 )
 
 args = _parser.parse_args()

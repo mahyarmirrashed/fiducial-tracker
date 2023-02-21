@@ -58,4 +58,4 @@ class Calibrator:
         self._calibrated_event.set()
 
   def calibrate(self) -> List[Point]:
-    return [self._calibrate_for("bottom left"), self._calibrate_for("top right")]
+    return [self._calibrate_for("top left"), self._calibrate_for("bottom right")]

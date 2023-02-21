@@ -29,8 +29,8 @@ class Commmunicator:
     """Communicator with fiducial tracker server."""
     self._port = port
     self._uuid = uuid
-    self._bottom_left_corner = corners[0]
-    self._top_right_corner = corners[1]
+    self._top_left_corner = corners[0]
+    self._bottom_right_corner = corners[1]
 
   def __enter__(self) -> Self:
     self._context = zmq.Context()
@@ -57,8 +57,8 @@ class Commmunicator:
             camera_id=self._uuid,
             frame_encoded=qoi.encode(frame),
             timestamp=datetime.datetime.now(),
-            bottom_left_corner=self._bottom_left_corner,
-            top_right_corner=self._top_right_corner,
+            top_left_corner=self._top_left_corner,
+            bottom_right_corner=self._bottom_right_corner,
           )
         )
       )
