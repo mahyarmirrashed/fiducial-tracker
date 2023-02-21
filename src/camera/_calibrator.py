@@ -43,7 +43,7 @@ class Calibrator:
     return self._calibrated_point
 
   def _get_calibrated_point(self, corner: str) -> None:
-    display(self._calibrator_title)
+    display(self._calibrator_title + "\n")
 
     while not self._calibrated_event.is_set():
       try:
@@ -51,8 +51,7 @@ class Calibrator:
         x, y = map(float, user_input.split(","))
       except ValueError:
         display(self._calibrator_title)
-        print('Error parsing coordinates in "x,y" form. Please try again.')
-        print()
+        print('Error parsing coordinates in "x,y" form. Please try again.' + "\n")
       else:
         self._calibrated_point = Point(x=x, y=y)
         self._calibrated_event.set()
