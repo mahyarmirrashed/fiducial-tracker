@@ -40,7 +40,7 @@ class Calibrator:
     while user_input := input(f"{corner.capitalize()} coordinate (x,y) >"):
       try:
         x, y = map(float, user_input.split(","))
-      except:
+      except ValueError:
         display(self._calibrator_title)
         print('Error parsing coordinates in "x,y" form. Please try again.')
         print()
