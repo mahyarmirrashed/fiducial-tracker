@@ -18,11 +18,14 @@ class Calibrator:
 
   def _calibrate_for(self, corner: str) -> Point:
     self._calibrated_event.clear()
+    self._calibrator_title = (
+      f"{self._video_reader.camera}: Calibrating for the {corner.lower()} corner..."
+    )
 
     Thread(target=self._get_calibrated_point, args=(corner,)).start()
 
     for frame in self._video_reader.frames():
-      cv.imshow(f"Calibrating for the {corner.lower()} corner...", frame)
+      cv.imshow(self._calibrator_title, frame)
       cv.waitKey(1)
 
       if self._calibrated_event.is_set():
@@ -32,15 +35,13 @@ class Calibrator:
     return self._calibrated_point
 
   def _get_calibrated_point(self, corner: str) -> None:
-    title = f"Calibrating for the {corner.lower()} corner...\n"
-
-    display(title)
+    display(self._calibrator_title)
 
     while user_input := input(f"{corner.capitalize()} coordinate (x,y) >"):
       try:
         x, y = map(float, user_input.split(","))
       except:
-        display(title)
+        display(self._calibrator_title)
         print('Error parsing coordinates in "x,y" form. Please try again.')
         print()
       else:

@@ -7,19 +7,22 @@ import cv2 as cv
 import numpy as np
 from typing_extensions import Self
 
+from src.common.models import Camera
+
 _DEFAULT_FPS = 30
 
 
 class VideoReader:
-  def __init__(self, src: Union[int, str], fps: Union[int, float] = _DEFAULT_FPS) -> None:
+  def __init__(self, camera: Camera, fps: Union[int, float] = _DEFAULT_FPS) -> None:
     """Wrapper for OpenCV video reading interactions."""
-    self._cap = self._get_capture(src)
+    self._camera = camera
+    self._cap = self._get_capture(self._camera.src)
     self._fps = fps
 
     self._prev_frame_time = 0.0
 
     if self._cap is None or not self._cap.isOpened():
-      raise ValueError(f"Unable to open video source: {src}")
+      raise ValueError(f"Unable to open video source: {self._camera.src}")
 
   def __enter__(self) -> Self:
     return self
@@ -44,6 +47,10 @@ class VideoReader:
       time.sleep(1.0 / self._fps - elapsed_time)
 
     self._prev_frame_time = time.time()
+
+  @property
+  def camera(self) -> Camera:
+    return self._camera
 
   @property
   def fps(self) -> float:
