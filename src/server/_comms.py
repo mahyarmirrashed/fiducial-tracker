@@ -1,4 +1,3 @@
-import dataclasses
 from types import TracebackType
 from typing import List, Optional, Union
 
@@ -41,21 +40,19 @@ class Communicator:
 
   def recv_video_stream(self) -> Optional[VideoStreamRequestMessage]:
     if (msg := self._video_stream_socket.recv()) is not None:
-      return VideoStreamRequestMessage(**ormsgpack.unpackb(msg))
+      return VideoStreamRequestMessage.from_dict(ormsgpack.unpackb(msg))
     return None
 
   def send_location_stream(self, fiducials: List[Fiducial]) -> None:
     self._location_stream_socket.send(
       ormsgpack.packb(
-        dataclasses.asdict(LocationStreamMessage(fiducials=fiducials)),
+        LocationStreamMessage(fiducials=fiducials).to_dict(),
       )
     )
 
   def send_video_stream(self, recommended_fps: Union[float, int]) -> None:
     self._video_stream_socket.send(
       ormsgpack.packb(
-        dataclasses.asdict(
-          VideoStreamResponseMessage(recommended_fps=float(recommended_fps)),
-        )
+        VideoStreamResponseMessage(recommended_fps=float(recommended_fps)).to_dict(),
       )
     )

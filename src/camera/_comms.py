@@ -1,4 +1,3 @@
-import dataclasses
 import datetime
 import uuid
 from types import TracebackType
@@ -52,19 +51,19 @@ class Commmunicator:
   def send(self, frame: np.ndarray) -> None:
     self._socket.send(
       ormsgpack.packb(
-        dataclasses.asdict(
-          VideoStreamRequestMessage(
-            camera_id=self._uuid,
-            frame_encoded=qoi.encode(frame),
-            timestamp=datetime.datetime.now(),
-            top_left_corner=self._top_left_corner,
-            bottom_right_corner=self._bottom_right_corner,
-          )
-        )
+        VideoStreamRequestMessage(
+          camera_id=self._uuid,
+          frame_encoded=qoi.encode(frame),
+          timestamp=datetime.datetime.now(),
+          top_left_corner=self._top_left_corner,
+          bottom_right_corner=self._bottom_right_corner,
+        ).to_dict()
       )
     )
 
   def recv(self) -> Optional[VideoStreamResponseMessage]:
     if self._socket.poll(_DEFAULT_TIMEOUT, zmq.POLLIN):
-      return VideoStreamResponseMessage(**ormsgpack.unpackb(self._socket.recv()))
+      return VideoStreamResponseMessage.from_dict(
+        ormsgpack.unpackb(self._socket.recv())
+      )
     return None

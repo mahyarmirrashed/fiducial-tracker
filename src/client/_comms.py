@@ -32,5 +32,5 @@ class Communicator:
 
   def recv(self) -> Optional[LocationStreamMessage]:
     if (msg := self._socket.recv()) is not None:
-      return LocationStreamMessage(**ormsgpack.unpackb(msg))
+      return LocationStreamMessage.from_dict(ormsgpack.unpackb(msg))
     return None
