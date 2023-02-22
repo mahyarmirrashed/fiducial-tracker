@@ -18,11 +18,9 @@ from ._args import args
 from ._comms import Communicator
 from ._utils import draw_rectangle
 
-FIDUCIAL_PUBLISHER_INTERVAL = 1  # second
-
 camera_cache = TTLCache(maxsize=100, ttl=30)
 fiducial_cache = TTLCache(maxsize=10, ttl=5)
-fiducial_publisher_heartbeat = Heartbeat(FIDUCIAL_PUBLISHER_INTERVAL)
+fiducial_publisher_heartbeat = Heartbeat(1 / args.frequency)
 
 obj: Decoded
 req: Union[VideoStreamRequestMessage, None]
@@ -36,6 +34,7 @@ def display_diagnostics(*, running: bool) -> None:
     f"""{server_state}
   Video stream address:     {lan_ip_address}:{args.video_stream_port}
   Location stream address:  {lan_ip_address}:{args.location_stream_port}
+  Publish frequency:        {args.frequency:.2} Hz
   
   Display raw frames:       {"Yes" if args.display_raw_frames else "No"}
   Display processed frames: {"Yes" if args.display_processed_frames else "No"}

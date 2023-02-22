@@ -1,9 +1,10 @@
 from argparse import ArgumentParser
 
-from src.common import IntegerRangeType
+from src.common import FloatRangeType, IntegerRangeType
 
 _DEFAULT_VIDEO_STREAM_PORT = 5000
 _DEFAULT_LOCATION_STREAM_PORT = 6000
+_DEFAULT_PUBLISH_FREQUENCY = 1.0
 
 _parser = ArgumentParser(description="Fiducial tracking server.")
 
@@ -18,6 +19,13 @@ _parser.add_argument(
   type=IntegerRangeType(1024, 65536),
   default=_DEFAULT_LOCATION_STREAM_PORT,
   help="Port number for publishing tracked fiducial locations",
+)
+_parser.add_argument(
+  "-f",
+  "--frequency",
+  type=FloatRangeType(lower=0.01),
+  default=_DEFAULT_PUBLISH_FREQUENCY,
+  help="Frequency to publish tracked fiducial locations",
 )
 _parser.add_argument(
   "--display-raw-frames",
