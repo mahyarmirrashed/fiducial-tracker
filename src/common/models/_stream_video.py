@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Tuple
 
 from .__dict_mixin import DictMixin
-from .point import Point
+from ._point import Point
 
 
 @dataclass(frozen=True)

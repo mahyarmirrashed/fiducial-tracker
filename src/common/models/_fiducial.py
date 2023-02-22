@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from .point import Point
+from ._point import Point
 
 
 @dataclass

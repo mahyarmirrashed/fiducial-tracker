@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import List
 
 from .__dict_mixin import DictMixin
-from .fiducial import Fiducial
+from ._fiducial import Fiducial
 
 
 @dataclass(frozen=True)
