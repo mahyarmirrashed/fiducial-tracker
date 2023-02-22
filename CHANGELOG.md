@@ -1,5 +1,28 @@
 
 
+## [0.12.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.11.0...0.12.0) (2023-02-22)
+
+
+### Features
+
+* add ability to reset heartbeat ([093c8c9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/093c8c92baaeb5342718a98c756c48e4f0595697))
+* **camera:** create camera dataclass for better ui ([0a788e9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/0a788e9e0a0bb1d1e22b145ed8035e0c88801af5))
+* make point based on tuple of two floats ([ed90f85](https://github.com/mahyarmirrashed/fiducial-tracker/commit/ed90f85e5d8ff27514f4cedc90074fea2012d5ff))
+* **models:** add dictionary mixin for serialization to python dictionaries ([4551956](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4551956ad8a456f72d86ed0597e0c4650372d2e7))
+* **server:** add heartbeat for regularly sending list of tracked fiducials to clients ([98f9cf9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/98f9cf9c6a1266b647e685f4575a03e162073cef))
+* **server:** properly scale and translate coordinate to world coordinates ([66ed6c4](https://github.com/mahyarmirrashed/fiducial-tracker/commit/66ed6c46d5201f08510fd0d2ed15fd3588bb537c))
+
+
+### Bug Fixes
+
+* **camera:** change coordinate system to match `opencv` ([b5eba7d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/b5eba7d50607734411bd32cd1d1905775b23a80a))
+* **camera:** cleanly exit on `KeyboardInterrupt` ([c18dc1a](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c18dc1ab30017a7160eb584706167700a880c16a))
+* **camera:** do not require direct show backend on linux ([f3b66da](https://github.com/mahyarmirrashed/fiducial-tracker/commit/f3b66dafba1cf844fec35d5ffad811dff407aefa))
+* **camera:** keep consistent spacing on prompt options ([e96904f](https://github.com/mahyarmirrashed/fiducial-tracker/commit/e96904ff4d31e69d2e47cdd843bdf16ddcdb6720))
+* **camera:** use proper `VideoReader` argument ([1cdca21](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1cdca21debc1a61b61c189bfe90563f22b1ae7e1))
+* specifically only handle `ValueError` ([b362f0a](https://github.com/mahyarmirrashed/fiducial-tracker/commit/b362f0a59f74c3e59ede8f48db8a09288ed296cd))
+* use dictionary mixin methods ([50484e6](https://github.com/mahyarmirrashed/fiducial-tracker/commit/50484e697e2c2882253aac89a65e91698517aebf))
+
 ## [0.11.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.10.0...0.11.0) (2023-02-21)
 
 
