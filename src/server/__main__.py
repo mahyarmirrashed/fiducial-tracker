@@ -54,6 +54,7 @@ try:
       processing_start_time = time.time()
 
       frame: np.ndarray = qoi.decode(req.frame_encoded)
+      height, width, _ = frame.shape
 
       if args.display_raw_frames:
         cv.imshow("Camera stream (raw)", frame)
@@ -65,7 +66,10 @@ try:
 
         fiducial_cache[identifier] = Fiducial(
           id=identifier,
-          location=Point(x=bbox.left + bbox.width // 2, y=bbox.top + bbox.height // 2),
+          location=Point(x=bbox.left + bbox.width // 2, y=bbox.top + bbox.height // 2)
+          .normalize(width, height)
+          .scale(*req.get_view())
+          .add(req.top_left_corner),
         )
 
         if args.display_processed_frames:
