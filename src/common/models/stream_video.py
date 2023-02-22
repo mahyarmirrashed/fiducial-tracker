@@ -4,11 +4,12 @@ import datetime
 import uuid
 from dataclasses import dataclass
 
+from .__dict_mixin import DictMixin
 from .point import Point
 
 
 @dataclass(frozen=True)
-class VideoStreamRequestMessage:
+class VideoStreamRequestMessage(DictMixin):
   """Implements the VideoStream request message arguments."""
 
   camera_id: uuid.UUID
@@ -25,7 +26,7 @@ class VideoStreamRequestMessage:
 
 
 @dataclass(frozen=True)
-class VideoStreamResponseMessage:
+class VideoStreamResponseMessage(DictMixin):
   """Implements the VideoStream response message arguments."""
 
   recommended_fps: float
