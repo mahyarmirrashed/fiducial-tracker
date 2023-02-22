@@ -10,6 +10,9 @@ class Heartbeat:
     current_time = time.time()
 
     if current_time - self._last_beat > self._beat_interval:
-      self._last_beat = current_time
+      self.reset(current_time)
       return True
     return False
+
+  def reset(self, last_beat: float = time.time()) -> None:
+    self._last_beat = last_beat
