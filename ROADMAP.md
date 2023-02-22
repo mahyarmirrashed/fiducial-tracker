@@ -17,11 +17,8 @@
   - [x] Assuming orthographic projection onto surface plane, only two points are needed to determine scale;
 - [ ] Enable option to track separately labelled fiducials (essentially track multiple fiducials with IDs);
   - [x] Research if same fiducial can be repeatedly used or if differing QR codes can be used instead;
-  - [ ] Server should have port to enable/disable tracking certain fiducial;
-    - [ ] Information may be provided from UI component;
-    - [ ] Authentication pathway on that gateway (optional);
 - [ ] Refactor `darknet` module to use Pythonic syntax;
-- [ ] Add ability to display raw frames on server;
-- [ ] Add ability to display processed frames on server;
+- [x] Add ability to display raw frames on server;
+- [x] Add ability to display processed frames on server;
   - [ ] Requires implementing drawing methods and conversion from the original `darknet` library;
   - [ ] Add ability to save processed frames on server (for demonstration purposes);
