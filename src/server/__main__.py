@@ -11,17 +11,18 @@ from pyzbar import pyzbar
 from pyzbar.locations import Rect
 from pyzbar.pyzbar import Decoded
 
-from src.common import display
+from src.common import Heartbeat, display
 from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 
 from ._args import args
 from ._comms import Communicator
 from ._utils import draw_rectangle
 
+FIDUCIAL_PUBLISHER_INTERVAL = 1  # second
+
 camera_cache = TTLCache(maxsize=100, ttl=30)
 fiducial_cache = TTLCache(maxsize=10, ttl=5)
-
-decoder = lambda obj: obj.data.decode("utf-8")
+fiducial_publisher_heartbeat = Heartbeat(FIDUCIAL_PUBLISHER_INTERVAL)
 
 obj: Decoded
 req: Union[VideoStreamRequestMessage, None]
@@ -50,6 +51,9 @@ try:
     while req := comms.recv_video_stream():
       # log connected camera uuid
       camera_cache[req.camera_id] = None
+
+      if fiducial_publisher_heartbeat.has_interval_passed():
+        comms.send_location_stream(fiducials=list(fiducial_cache.values()))
 
       processing_start_time = time.time()
 
