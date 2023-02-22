@@ -35,6 +35,7 @@ class Commmunicator:
     self._context = zmq.Context()
     self._socket = self._context.socket(zmq.REQ)
     self._socket.setsockopt(zmq.REQ_RELAXED, True)
+    self._socket.setsockopt(zmq.LINGER, False)
     self._socket.connect(f"tcp://localhost:{self._port}")
 
     return self
