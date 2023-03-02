@@ -15,12 +15,4 @@ Communication between cameras and server is accomplished using REQ/REP sockets. 
 
 ## Conda Environment
 
-Create a new Anaconda environment and installed the required packages (commands listed below).
-
-```bash
-conda create -n fiducial-tracker python=3.8 -y
-conda activate fiducial-tracker
-conda install -c conda-forge mamba -y
-mamba install -c conda-forge pyzbar pyzmq opencv typing-extensions cachetools -y
-pip3 install ormsgpack qoi
-```
+To run the code, setup the necessary `conda` environment by running `conda env create -f environment.yml`.
