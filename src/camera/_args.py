@@ -12,7 +12,7 @@ _parser.add_argument(
   "--video-stream-address",
   type=SocketAddressType(),
   default=_DEFAULT_VIDEO_STREAM_ADDRESS,
-  help="Socket address target for captured video stream",
+  help="Socket address for publishing captured video stream",
 )
 
 _group = _parser.add_mutually_exclusive_group(required=True)
