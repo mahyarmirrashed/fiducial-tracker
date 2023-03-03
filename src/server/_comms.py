@@ -8,23 +8,28 @@ from typing_extensions import Self
 from src.common.models import (
   Fiducial,
   LocationStreamMessage,
+  SocketAddress,
   VideoStreamRequestMessage,
   VideoStreamResponseMessage,
 )
 
 
 class Communicator:
-  def __init__(self, location_stream_port: int, video_stream_port: int) -> None:
+  def __init__(
+    self,
+    location_stream_address: SocketAddress,
+    video_stream_address: SocketAddress,
+  ) -> None:
     """Communicator with fiducial tracker cameras and clients."""
-    self._location_stream_port = location_stream_port
-    self._video_stream_port = video_stream_port
+    self._location_stream_address = location_stream_address
+    self._video_stream_address = video_stream_address
 
   def __enter__(self) -> Self:
     self._context = zmq.Context()
     self._location_stream_socket = self._context.socket(zmq.PUB)
-    self._location_stream_socket.bind(f"tcp://*:{self._location_stream_port}")
+    self._location_stream_socket.bind(f"tcp://*:{self._location_stream_address.port}")
     self._video_stream_socket = self._context.socket(zmq.REP)
-    self._video_stream_socket.bind(f"tcp://*:{self._video_stream_port}")
+    self._video_stream_socket.bind(f"tcp://*:{self._video_stream_address.port}")
 
     return self
 

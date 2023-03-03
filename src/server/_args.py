@@ -1,24 +1,25 @@
 from argparse import ArgumentParser
 
-from src.common import FloatRangeType, IntegerRangeType
+from src.common import FloatRangeType, SocketAddressType
+from src.common.models import SocketAddress
 
-_DEFAULT_VIDEO_STREAM_PORT = 5000
-_DEFAULT_LOCATION_STREAM_PORT = 6000
+_DEFAULT_VIDEO_STREAM_ADDRESS = SocketAddress(host="localhost", port=5000)
+_DEFAULT_LOCATION_STREAM_ADDRESS = SocketAddress(host="localhost", port=6000)
 _DEFAULT_PUBLISH_FREQUENCY = 1.0
 
 _parser = ArgumentParser(description="Fiducial tracking server.")
 
 _parser.add_argument(
-  "--video-stream-port",
-  type=IntegerRangeType(1024, 65536),
-  default=_DEFAULT_VIDEO_STREAM_PORT,
-  help="Port number for collecting video streams",
+  "--video-stream-address",
+  type=SocketAddressType(),
+  default=_DEFAULT_VIDEO_STREAM_ADDRESS,
+  help="Socket address for collecting video streams",
 )
 _parser.add_argument(
-  "--location-stream-port",
-  type=IntegerRangeType(1024, 65536),
-  default=_DEFAULT_LOCATION_STREAM_PORT,
-  help="Port number for publishing tracked fiducial locations",
+  "--location-stream-address",
+  type=SocketAddressType(),
+  default=_DEFAULT_LOCATION_STREAM_ADDRESS,
+  help="Socket address for publishing tracked fiducial locations",
 )
 _parser.add_argument(
   "--frequency",

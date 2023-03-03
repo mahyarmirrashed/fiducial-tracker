@@ -27,13 +27,12 @@ req: Union[VideoStreamRequestMessage, None]
 
 
 def display_diagnostics(*, running: bool) -> None:
-  lan_ip_address = socket.gethostbyname(socket.getfqdn())
   server_state = f"\033[1mServer is [{'RUNNING' if running else 'STOPPED'}]:\033[0;0m"
 
   display(
     f"""{server_state}
-  Video stream address:     {lan_ip_address}:{args.video_stream_port}
-  Location stream address:  {lan_ip_address}:{args.location_stream_port}
+  Video stream address:     {args.video_stream_address}
+  Location stream address:  {args.location_stream_address}
   Publish frequency:        {args.frequency:.2} Hz
   
   Display raw frames:       {"Yes" if args.display_raw_frames else "No"}
@@ -46,7 +45,7 @@ def display_diagnostics(*, running: bool) -> None:
 try:
   display_diagnostics(running=True)
 
-  with Communicator(args.location_stream_port, args.video_stream_port) as comms:
+  with Communicator(args.location_stream_address, args.video_stream_address) as comms:
     while req := comms.recv_video_stream():
       # log connected camera uuid
       camera_cache[req.camera_id] = None
