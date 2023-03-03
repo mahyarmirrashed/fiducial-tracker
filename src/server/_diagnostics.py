@@ -1,5 +1,7 @@
 from src.common import display
 
+from ._args import args
+
 
 def _generate_server_state_message(running: bool) -> str:
   if running:
@@ -7,7 +9,7 @@ def _generate_server_state_message(running: bool) -> str:
   return f"\x1b[41;1mServer is [STOPPED]\x1b[0m"
 
 
-def show_status(args, *, running: bool) -> None:
+def show_status(*, running: bool) -> None:
   if not args.show_status:
     return
 
