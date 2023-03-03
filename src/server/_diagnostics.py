@@ -8,6 +8,9 @@ def _generate_server_state_message(running: bool) -> str:
 
 
 def show_status(args, *, running: bool) -> None:
+  if not args.show_status:
+    return
+
   state = _generate_server_state_message(running)
 
   display(
