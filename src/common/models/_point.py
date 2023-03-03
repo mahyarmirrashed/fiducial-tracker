@@ -10,6 +10,9 @@ class Point:
   x: float
   y: float
 
+  def __repr__(self) -> str:
+    return f"Point(x={self.x:.1f}, y={self.y:.1f})"
+
   def __add__(self, other: Self) -> Self:
     return Point(x=self.x + other.x, y=self.y + other.y)
 
