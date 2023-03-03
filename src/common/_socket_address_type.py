@@ -9,7 +9,7 @@ class SocketAddressType:
   def __call__(self, arg: Any) -> SocketAddress:
     try:
       host, port = arg.split(":")
-      address = SocketAddress(host, int(port))
+      address = SocketAddress(host=host, port=int(port))
     except ValueError:
       raise ArgumentTypeError("Invalid socket address")
 
