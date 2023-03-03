@@ -10,6 +10,7 @@ _parser = ArgumentParser(description="Fiducial tracker camera.")
 
 _parser.add_argument(
   "--video-stream-address",
+  dest="address",
   type=SocketAddressType(),
   default=_DEFAULT_VIDEO_STREAM_ADDRESS,
   help="Socket address target for captured video stream",
