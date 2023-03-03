@@ -1,4 +1,6 @@
-from dataclasses import asdict as _to_dict, fields, is_dataclass
+import typing
+from dataclasses import asdict as _to_dict
+from dataclasses import fields, is_dataclass
 from typing import Any, Dict, Mapping, Type, TypeVar
 
 T = TypeVar("T", bound="DictMixin")
@@ -12,7 +14,12 @@ def _from_dict(cls: Type[U], src: Mapping[str, Any]) -> U:
 
   for field_name, value in src.items():
     try:
-      constructor_inputs[field_name] = _from_dict(field_types_lookup[field_name], value)
+      if isinstance(value, list):
+        list_type = typing.get_args(field_types_lookup[field_name])[0]
+        constructor_inputs[field_name] = [_from_dict(list_type, item) for item in value]
+      else:
+        field_type = field_types_lookup[field_name]
+        constructor_inputs[field_name] = _from_dict(field_type, value)
     except TypeError:
       # breaking recursion if not a dataclass
       constructor_inputs[field_name] = value
