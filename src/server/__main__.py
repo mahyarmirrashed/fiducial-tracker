@@ -16,6 +16,7 @@ from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 from ._args import args
 from ._comms import Communicator
 from ._diagnostics import show_status
+from ._logger import logger
 from ._utils import draw_rectangle
 
 camera_cache = TTLCache(maxsize=100, ttl=30)
@@ -25,10 +26,11 @@ fiducial_publisher_heartbeat = Heartbeat(1 / args.frequency)
 obj: Decoded
 req: Union[VideoStreamRequestMessage, None]
 
+logger.info(f"Starting fiducial tracker server.")
+
+show_status(running=True)
 
 try:
-  show_status(args, running=True)
-
   with Communicator(args.location_stream_address, args.video_stream_address) as comms:
     while req := comms.recv_video_stream():
       # log connected camera uuid
@@ -76,6 +78,8 @@ try:
 except KeyboardInterrupt:
   pass
 finally:
-  show_status(args, running=False)
+  logger.info("Ending fiducial tracker server.")
+
+  show_status(running=False)
 
   cv.destroyAllWindows()
