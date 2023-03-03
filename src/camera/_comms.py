@@ -11,6 +11,7 @@ from typing_extensions import Self
 
 from src.common.models import (
   Point,
+  SocketAddress,
   VideoStreamRequestMessage,
   VideoStreamResponseMessage,
 )
@@ -21,12 +22,12 @@ _DEFAULT_TIMEOUT = 5_000  # milliseconds
 class Commmunicator:
   def __init__(
     self,
-    port: int,
+    address: SocketAddress,
     uuid: uuid.UUID,
     corners: List[Point],
   ) -> None:
     """Communicator with fiducial tracker server."""
-    self._port = port
+    self._address = address
     self._uuid = uuid
     self._top_left_corner = corners[0]
     self._bottom_right_corner = corners[1]
@@ -36,7 +37,7 @@ class Commmunicator:
     self._socket = self._context.socket(zmq.REQ)
     self._socket.setsockopt(zmq.REQ_RELAXED, True)
     self._socket.setsockopt(zmq.LINGER, False)
-    self._socket.connect(f"tcp://localhost:{self._port}")
+    self._socket.connect(f"tcp://{self._address}")
 
     return self
 

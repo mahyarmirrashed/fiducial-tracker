@@ -20,8 +20,8 @@ try:
       args.corners = Calibrator(video_reader).calibrate()
 
   with VideoReader(_camera) as video_reader:
-    with Commmunicator(args.port, _camera.id, args.corners) as comms:
-      logger.info(f"Starting video stream to localhost:{args.port}.")
+    with Commmunicator(args.address, _camera.id, args.corners) as comms:
+      logger.info(f"Starting video stream to {args.address}.")
 
       for frame in video_reader.frames():
         comms.send(frame)
@@ -33,4 +33,4 @@ try:
         else:
           logger.debug("Timed out on receiving server response.")
 except (AssertionError, KeyboardInterrupt):
-  logger.info(f"Ending video stream to localhost:{args.port}.")
+  logger.info(f"Ending video stream to {args.address}.")
