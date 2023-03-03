@@ -1,17 +1,18 @@
 from argparse import ArgumentParser
 
-from src.common import FileType, IntegerRangeType, PointType
+from src.common import FileType, IntegerRangeType, PointType, SocketAddressType
+from src.common.models import SocketAddress
 
 _ALLOWABLE_VIDEO_TYPES = ["mp4", "webm"]
-_DEFAULT_VIDEO_STREAM_PORT = 5000
+_DEFAULT_VIDEO_STREAM_ADDRESS = SocketAddress(host="localhost", port=5000)
 
 _parser = ArgumentParser(description="Fiducial tracker camera.")
 
 _parser.add_argument(
-  "--port",
-  type=IntegerRangeType(1024, 65536),
-  default=_DEFAULT_VIDEO_STREAM_PORT,
-  help="Port number for publishing captured video stream",
+  "--video-stream-address",
+  type=SocketAddressType(),
+  default=_DEFAULT_VIDEO_STREAM_ADDRESS,
+  help="Socket address target for captured video stream",
 )
 
 _group = _parser.add_mutually_exclusive_group(required=True)
