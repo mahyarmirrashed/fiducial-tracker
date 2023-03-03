@@ -4,7 +4,7 @@ from ._comms import Communicator
 from ._logger import logger
 
 try:
-  with Communicator(args.port) as comms:
+  with Communicator(args.location_stream_address) as comms:
     logger.info("Starting client.")
 
     while req := comms.recv():

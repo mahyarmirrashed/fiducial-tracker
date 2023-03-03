@@ -5,18 +5,18 @@ import ormsgpack
 import zmq
 from typing_extensions import Self
 
-from src.common.models import LocationStreamMessage
+from src.common.models import LocationStreamMessage, SocketAddress
 
 
 class Communicator:
-  def __init__(self, port: int) -> None:
+  def __init__(self, address: SocketAddress) -> None:
     """Communicator with fiducial tracker server."""
-    self._port = port
+    self._address = address
 
   def __enter__(self) -> Self:
     self._context = zmq.Context()
     self._socket = self._context.socket(zmq.SUB)
-    self._socket.connect(f"tcp://localhost:{self._port}")
+    self._socket.connect(f"tcp://{self._address}")
     self._socket.setsockopt(zmq.SUBSCRIBE, b"")
 
     return self
