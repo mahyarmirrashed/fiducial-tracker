@@ -1,12 +1,13 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
-from src.common import display
-
 from ._args import args
 from ._comms import Communicator
+from ._logger import logger
 
 try:
   with Communicator(args.port) as comms:
+    logger.info("Starting client.")
+
     while req := comms.recv():
-      display("\n".join(map(repr, req.fiducials)))
+      logger.debug(f"Received tracked fiducials: {req.fiducials}.")
 except KeyboardInterrupt:
-  display("Client is exiting...")
+  logger.info("Ending client.")
