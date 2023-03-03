@@ -8,7 +8,6 @@ _DEFAULT_LOCATION_STREAM_PORT = 6000
 _parser = ArgumentParser(description="Fiducial tracker client.")
 
 _parser.add_argument(
-  "-p",
   "--port",
   type=IntegerRangeType(1024, 65536),
   default=_DEFAULT_LOCATION_STREAM_PORT,

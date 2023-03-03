@@ -21,7 +21,6 @@ _parser.add_argument(
   help="Port number for publishing tracked fiducial locations",
 )
 _parser.add_argument(
-  "-f",
   "--frequency",
   type=FloatRangeType(lower=0.01),
   default=_DEFAULT_PUBLISH_FREQUENCY,

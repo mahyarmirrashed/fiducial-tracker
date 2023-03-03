@@ -8,7 +8,6 @@ _DEFAULT_VIDEO_STREAM_PORT = 5000
 _parser = ArgumentParser(description="Fiducial tracker camera.")
 
 _parser.add_argument(
-  "-p",
   "--port",
   type=IntegerRangeType(1024, 65536),
   default=_DEFAULT_VIDEO_STREAM_PORT,
@@ -18,13 +17,11 @@ _parser.add_argument(
 _group = _parser.add_mutually_exclusive_group(required=True)
 
 _group.add_argument(
-  "-i",
   "--input",
   type=FileType(_ALLOWABLE_VIDEO_TYPES),
   help=f"Path to video file (e.g. {_ALLOWABLE_VIDEO_TYPES})",
 )
 _group.add_argument(
-  "-c",
   "--camera",
   type=IntegerRangeType(lower=0),
   help="Camera to use (e.g. 0)",
@@ -42,4 +39,4 @@ args = _parser.parse_args()
 args.src = args.input if args.camera is None else args.camera
 
 if args.input and args.corners is None:
-  _parser.error("-i/--input requires --corners")
+  _parser.error("--input requires --corners")
