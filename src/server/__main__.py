@@ -1,5 +1,4 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
-import socket
 import time
 from typing import Union
 
@@ -11,11 +10,12 @@ from pyzbar import pyzbar
 from pyzbar.locations import Rect
 from pyzbar.pyzbar import Decoded
 
-from src.common import Heartbeat, display
+from src.common import Heartbeat
 from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 
 from ._args import args
 from ._comms import Communicator
+from ._diagnostics import show_status
 from ._utils import draw_rectangle
 
 camera_cache = TTLCache(maxsize=100, ttl=30)
@@ -26,24 +26,8 @@ obj: Decoded
 req: Union[VideoStreamRequestMessage, None]
 
 
-def display_diagnostics(*, running: bool) -> None:
-  server_state = f"\033[1mServer is [{'RUNNING' if running else 'STOPPED'}]:\033[0;0m"
-
-  display(
-    f"""{server_state}
-  Video stream address:     {args.video_stream_address}
-  Location stream address:  {args.location_stream_address}
-  Publish frequency:        {args.frequency:.2} Hz
-  
-  Display raw frames:       {"Yes" if args.display_raw_frames else "No"}
-  Display processed frames: {"Yes" if args.display_processed_frames else "No"}
-  Save raw frames:          {"Yes" if args.save_raw_frames else "No"}
-  Save processed frames:    {"Yes" if args.save_processed_frames else "No"}"""
-  )
-
-
 try:
-  display_diagnostics(running=True)
+  show_status(args, running=True)
 
   with Communicator(args.location_stream_address, args.video_stream_address) as comms:
     while req := comms.recv_video_stream():
@@ -92,6 +76,6 @@ try:
 except KeyboardInterrupt:
   pass
 finally:
-  display_diagnostics(running=False)
+  show_status(args, running=False)
 
   cv.destroyAllWindows()
