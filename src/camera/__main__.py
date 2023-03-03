@@ -30,5 +30,7 @@ try:
           logger.debug(f"Received FPS recommendation of {res.recommended_fps:.1f} FPS.")
 
           video_reader.fps = res.recommended_fps
+        else:
+          logger.debug("Timed out on receiving server response.")
 except (AssertionError, KeyboardInterrupt):
   logger.info(f"Ending video stream to localhost:{args.port}.")
