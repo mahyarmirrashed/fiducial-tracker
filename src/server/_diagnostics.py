@@ -1,11 +1,14 @@
 from src.common import display
 
 
-def show_status(args, *, running: bool) -> None:
+def _generate_server_state_message(running: bool) -> str:
   if running:
-    state = f"\x1b[42;1mServer is [RUNNING]\x1b[0m"
-  else:
-    state = f"\x1b[41;1mServer is [STOPPED]\x1b[0m"
+    return f"\x1b[42;1mServer is [RUNNING]\x1b[0m"
+  return f"\x1b[41;1mServer is [STOPPED]\x1b[0m"
+
+
+def show_status(args, *, running: bool) -> None:
+  state = _generate_server_state_message(running)
 
   display(
     f"""{state}
