@@ -3,9 +3,9 @@ from typing import List, Union
 
 import cv2 as cv
 
-from src.common import display
 from src.common.models import Point
 
+from ._logger import logger
 from ._video_reader import VideoReader
 
 
@@ -22,9 +22,7 @@ class Calibrator:
   def _calibrate_for(self, corner: str) -> Point:
     self._calibrated_event.clear()
     self._calibrated_point = None
-    self._calibrator_title = (
-      f"{self._video_reader.camera}: Calibrating for the {corner.lower()} corner..."
-    )
+    self._calibrator_title = f"Calibrating {corner.lower()} corner."
 
     self._calibrator_thread = Thread(target=self._get_calibrated_point, args=(corner,))
     self._calibrator_thread.daemon = True
@@ -35,6 +33,7 @@ class Calibrator:
       cv.waitKey(1)
 
       if self._calibrated_event.is_set():
+        logger.debug(f"{corner.capitalize()} corner calibration completed.")
         break
 
     self._calibrate_cleanup()
@@ -43,18 +42,21 @@ class Calibrator:
     return self._calibrated_point
 
   def _get_calibrated_point(self, corner: str) -> None:
-    display(self._calibrator_title + "\n")
+    logger.info(self._calibrator_title)
 
     while not self._calibrated_event.is_set():
       try:
         user_input = input(f"{corner.capitalize()} coordinate (x,y) >")
         x, y = map(float, user_input.split(","))
       except ValueError:
-        display(self._calibrator_title)
-        print('Error parsing coordinates in "x,y" form. Please try again.' + "\n")
+        logger.warn("Unable to parse coordinates. Please retry.")
       else:
         self._calibrated_point = Point(x=x, y=y)
         self._calibrated_event.set()
 
   def calibrate(self) -> List[Point]:
-    return [self._calibrate_for("top left"), self._calibrate_for("bottom right")]
+    logger.info("Starting corner calibration process.")
+    corners = [self._calibrate_for("top left"), self._calibrate_for("bottom right")]
+    logger.info("Completed corner calibration process.")
+
+    return corners
