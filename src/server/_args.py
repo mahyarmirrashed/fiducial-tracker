@@ -22,6 +22,11 @@ _parser.add_argument(
   help="Socket address for publishing tracked fiducial locations",
 )
 _parser.add_argument(
+  "--show-status",
+  action="store_true",
+  help="Show system status rather than logging messages",
+)
+_parser.add_argument(
   "--frequency",
   type=FloatRangeType(lower=0.01),
   default=_DEFAULT_PUBLISH_FREQUENCY,
