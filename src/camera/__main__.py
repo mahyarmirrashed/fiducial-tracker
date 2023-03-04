@@ -16,10 +16,10 @@ try:
   if args.camera is not None and args.corners is None:
     logger.debug("Corner coordinates were not provided.")
 
-    with VideoReader(_camera) as video_reader:
+    with VideoReader(_camera, color=True) as video_reader:
       args.corners = Calibrator(video_reader).calibrate()
 
-  with VideoReader(_camera) as video_reader:
+  with VideoReader(_camera, color=args.color) as video_reader:
     with Commmunicator(args.video_stream_address, _camera.id, args.corners) as comms:
       logger.info(f"Starting video stream to {args.video_stream_address}.")
 

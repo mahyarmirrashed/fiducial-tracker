@@ -34,6 +34,11 @@ _parser.add_argument(
   nargs=2,
   help="Corners (top_left, bottom_right) in real world coordinates",
 )
+_parser.add_argument(
+  "--color",
+  action="store_true",
+  help="Send colorized captured video stream",
+)
 
 args = _parser.parse_args()
 
