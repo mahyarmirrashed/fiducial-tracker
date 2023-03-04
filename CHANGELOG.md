@@ -1,5 +1,14 @@
 
 
+## [0.14.1](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.14.0...0.14.1) (2023-03-04)
+
+
+### Bug Fixes
+
+* enable negative values for view for proper transformations ([cb1a024](https://github.com/mahyarmirrashed/fiducial-tracker/commit/cb1a0247b2d629061733e037ca38cd3a92ba0576))
+* properly extract height and width parameters from frame shape ([f5f7279](https://github.com/mahyarmirrashed/fiducial-tracker/commit/f5f7279ee0b8b3d8f39535d5facf232467128c09))
+* **server:** calibrate heading to orientation of view rectangle ([1a7b5d9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/1a7b5d9e924db964d6b9870e35b3c536c27d1e6c))
+
 ## [0.14.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.13.0...0.14.0) (2023-03-04)
 
 
