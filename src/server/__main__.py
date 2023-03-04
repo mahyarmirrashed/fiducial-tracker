@@ -47,7 +47,7 @@ try:
         cv.imshow("Camera stream (raw)", frame)
         cv.waitKey(1)
 
-      for obj in pyzbar.decode(frame):
+      for obj in pyzbar.decode(frame, symbols=[pyzbar.ZBarSymbol.QRCODE]):
         bbox: Rect = obj.rect
         identifier = obj.data.decode("utf-8")
 
