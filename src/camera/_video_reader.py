@@ -16,7 +16,7 @@ class VideoReader:
   def __init__(self, camera: Camera, fps: Union[int, float] = _DEFAULT_FPS) -> None:
     """Wrapper for OpenCV video reading interactions."""
     self._camera = camera
-    self._cap = self._get_capture(self._camera.src)
+    self._cap = self._get_video_capture(self._camera.src)
     self._fps = fps
 
     self._prev_frame_time = 0.0
@@ -35,7 +35,7 @@ class VideoReader:
   ) -> None:
     self._cap.release()
 
-  def _get_capture(self, src: Union[int, str]) -> cv.VideoCapture:
+  def _get_video_capture(self, src: Union[int, str]) -> cv.VideoCapture:
     if "linux" in sys.platform:
       return cv.VideoCapture(src)
     return cv.VideoCapture(src, cv.CAP_DSHOW)
