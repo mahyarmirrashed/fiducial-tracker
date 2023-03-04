@@ -1,5 +1,28 @@
 
 
+## [0.14.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.13.0...0.14.0) (2023-03-04)
+
+
+### Features
+
+* **camera:** add ability to enable color stream if needed ([dca4a19](https://github.com/mahyarmirrashed/fiducial-tracker/commit/dca4a195240429430e482b2dd31c2f74ecfd1fa4))
+* **server:** add heading information for tracked fiducials ([6b87ce3](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6b87ce3ebbf8b2233655c97a43912aa8aa86cdd6))
+* **server:** use `zxing-cpp` instead of `pyzbar` ([6216f35](https://github.com/mahyarmirrashed/fiducial-tracker/commit/6216f35d6cb08e4e16f6443c0f21771f2da50331))
+* **server:** window manager to create separate windows for each input stream ([c5660e9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c5660e93b2d421a7457ac26035d944338e2599e8))
+* **video_stream:** skip encoding step and send array as raw bytes along with shape information ([c26f118](https://github.com/mahyarmirrashed/fiducial-tracker/commit/c26f1188275d198fa3b0ec2ac1f3f8d2bf42a13d))
+
+
+### Bug Fixes
+
+* **camera:** allow `mkv` video file types ([7fcd64d](https://github.com/mahyarmirrashed/fiducial-tracker/commit/7fcd64dc44b234152034811dfd589df88b8c736b))
+* prevent zero division possibility ([3523359](https://github.com/mahyarmirrashed/fiducial-tracker/commit/3523359108a14981053598cd54ef43c5cf0b1151))
+* update open windows after pruning ([4ebb392](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4ebb392e4bc8a4e033722cb7b8c685050fbec967))
+
+
+### Performance Improvements
+
+* **server:** add specification to only scan for QR codes ([9f683d4](https://github.com/mahyarmirrashed/fiducial-tracker/commit/9f683d4c829c59ed4e2cef9e4ec983c9843c34d4))
+
 ## [0.13.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.12.0...0.13.0) (2023-03-04)
 
 
