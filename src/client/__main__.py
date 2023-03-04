@@ -1,12 +1,12 @@
 #!/home/mmirrashed/.conda/envs/tracker/bin/python
 from ._args import args
 from ._comms import Communicator
-from ._firebase import FirebaseConnection
+from ._database import DatabaseConnection
 from ._logger import logger
 
 try:
   with Communicator(args.location_stream_address) as comms:
-    with FirebaseConnection(args.firebase_certificate) as conn:
+    with DatabaseConnection(args.firebase_certificate) as conn:
       logger.info("Starting client.")
 
       while req := comms.recv():

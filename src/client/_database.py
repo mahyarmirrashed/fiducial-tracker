@@ -9,7 +9,7 @@ from typing_extensions import Self
 from ._logger import logger
 
 
-class FirebaseConnection:
+class DatabaseConnection:
   def __init__(self, certificate: Union[str, None]) -> None:
     self._certificate = certificate
 
