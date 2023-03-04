@@ -21,10 +21,10 @@ class VideoStreamRequestMessage(DictMixin):
   bottom_right_corner: Point
 
   def _get_view_height(self) -> float:
-    return abs(self.bottom_right_corner.y - self.top_left_corner.y)
+    return self.bottom_right_corner.y - self.top_left_corner.y
 
   def _get_view_width(self) -> float:
-    return abs(self.bottom_right_corner.x - self.top_left_corner.x)
+    return self.bottom_right_corner.x - self.top_left_corner.x
 
   def get_view(self) -> Tuple[float, float]:
     return (self._get_view_width(), self._get_view_height())
