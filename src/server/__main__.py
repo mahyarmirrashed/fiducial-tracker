@@ -11,7 +11,7 @@ from ._analyze import track_fiducial
 from ._args import args
 from ._comms import Communicator
 from ._diagnostics import show_status
-from ._display import close_old_connection_windows, display_frame_in_window
+from ._display import display_manager
 from ._logger import logger
 
 _camera_feed_cache = TTLCache(maxsize=100, ttl=10)
@@ -37,15 +37,15 @@ try:
       frame = np.frombuffer(req.frame, dtype=np.uint8).reshape(req.shape)
 
       if args.display_raw_frames:
-        display_frame_in_window(f"Raw stream ({req.camera_id})", frame)
+        display_manager.display(f"Raw stream ({req.camera_id})", frame)
 
       track_fiducial(frame, req, _fiducial_cache, draw=args.display_processed_frames)
 
       if args.display_processed_frames:
-        display_frame_in_window(f"Processed stream ({req.camera_id})", frame)
+        display_manager.display(f"Processed stream ({req.camera_id})", frame)
 
       if _camera_feed_window_manager_heartbeat.has_interval_passed():
-        close_old_connection_windows(_camera_feed_cache.keys())
+        display_manager.close_old(_camera_feed_cache.keys())
 
       recommended_fps = 1 / (time.time() - processing_start_time)
       recommended_fps_balanced = recommended_fps / max(len(_camera_feed_cache), 1)
