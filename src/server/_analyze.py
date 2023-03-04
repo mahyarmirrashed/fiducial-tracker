@@ -44,7 +44,7 @@ def track_fiducial(
       .normalize(width, height)
       .scale(*req.get_view())
       .add(req.top_left_corner),
-      heading=detection.orientation,
+      heading=(detection.orientation - req.get_rotation()) % 360,
     )
 
     if draw:

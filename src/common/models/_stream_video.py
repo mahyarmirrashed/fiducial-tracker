@@ -1,6 +1,7 @@
 """Defines the message protocol model for streaming video data."""
 
 import datetime
+import math
 import uuid
 from dataclasses import dataclass
 from typing import Tuple
@@ -25,6 +26,12 @@ class VideoStreamRequestMessage(DictMixin):
 
   def _get_view_width(self) -> float:
     return self.bottom_right_corner.x - self.top_left_corner.x
+
+  def get_rotation(self) -> float:
+    dx = self.bottom_right_corner.x - self.top_left_corner.x
+    dy = self.bottom_right_corner.y - self.top_left_corner.y
+
+    return (math.atan2(dy, dx) * (180 / math.pi)) - 45
 
   def get_view(self) -> Tuple[float, float]:
     return (self._get_view_width(), self._get_view_height())
