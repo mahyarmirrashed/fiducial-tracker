@@ -10,3 +10,4 @@ from ._point import Point
 class Fiducial(DictMixin):
   id: str
   location: Point
+  heading: int
