@@ -17,6 +17,8 @@ class _DisplayManager:
     for window in _inactive_windows:
       cv.destroyWindow(window)
 
+    self._open_windows = _active_windows
+
   def display(self, title: str, frame: np.ndarray) -> None:
     self._open_windows.add(title)
 
