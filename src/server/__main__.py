@@ -13,9 +13,9 @@ from ._comms import Communicator
 from ._diagnostics import show_status
 from ._logger import logger
 
-camera_cache = TTLCache(maxsize=100, ttl=30)
-fiducial_location_cache = TTLCache(maxsize=10, ttl=5)
-fiducial_publisher_heartbeat = Heartbeat(1 / args.frequency)
+_camera_feed_cache = TTLCache(maxsize=100, ttl=10)
+_fiducial_cache = TTLCache(maxsize=10, ttl=5)
+_fiducial_publisher_heartbeat = Heartbeat(1 / args.frequency)
 
 logger.info(f"Starting fiducial tracker server.")
 
@@ -25,23 +25,23 @@ try:
   with Communicator(args.location_stream_address, args.video_stream_address) as comms:
     while req := comms.recv_video_stream():
       # log connected camera uuid
-      camera_cache[req.camera_id] = None
+      _camera_feed_cache[req.camera_id] = None
 
-      if fiducial_publisher_heartbeat.has_interval_passed():
-        comms.send_location_stream(fiducials=list(fiducial_location_cache.values()))
+      if _fiducial_publisher_heartbeat.has_interval_passed():
+        comms.send_location_stream(fiducials=list(_fiducial_cache.values()))
 
       processing_start_time = time.time()
 
       frame = np.frombuffer(req.frame, dtype=np.uint8).reshape(req.shape)
 
       if args.display_raw_frames:
-        cv.imshow("Camera stream (raw)", frame)
+        cv.imshow(f"Raw stream ({req.camera_id})", frame)
         cv.waitKey(1)
 
-      track_fiducial(frame, req, fiducial_location_cache, args.display_processed_frames)
+      track_fiducial(frame, req, _fiducial_cache, draw=args.display_processed_frames)
 
       if args.display_processed_frames:
-        cv.imshow("Camera stream (processed)", frame)
+        cv.imshow(f"Processed stream ({req.camera_id})", frame)
         cv.waitKey(1)
 
       recommended_fps = 1 / (time.time() - processing_start_time)
