@@ -5,7 +5,6 @@ from typing import List, Optional, Union
 
 import numpy as np
 import ormsgpack
-import qoi
 import zmq
 from typing_extensions import Self
 
@@ -55,7 +54,8 @@ class Commmunicator:
       ormsgpack.packb(
         VideoStreamRequestMessage(
           camera_id=self._uuid,
-          frame_encoded=qoi.encode(frame),
+          frame=frame.tobytes(),
+          shape=frame.shape,
           timestamp=datetime.datetime.now(),
           top_left_corner=self._top_left_corner,
           bottom_right_corner=self._bottom_right_corner,

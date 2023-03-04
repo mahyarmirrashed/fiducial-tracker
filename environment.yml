@@ -223,7 +223,6 @@ dependencies:
     - pyasn1-modules==0.2.8
     - pyjwt==2.6.0
     - pyparsing==3.0.9
-    - qoi==0.2.0
     - rsa==4.9
     - six==1.16.0
     - uritemplate==4.1.1

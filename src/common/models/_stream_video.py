@@ -14,7 +14,8 @@ class VideoStreamRequestMessage(DictMixin):
   """Implements the VideoStream request message arguments."""
 
   camera_id: uuid.UUID
-  frame_encoded: bytes
+  frame: bytes
+  shape: Tuple[int, ...]
   timestamp: datetime.datetime
   top_left_corner: Point
   bottom_right_corner: Point

@@ -4,7 +4,6 @@ from typing import Union
 
 import cv2 as cv
 import numpy as np
-import qoi
 from cachetools import TTLCache
 from pyzbar import pyzbar
 from pyzbar.locations import Rect
@@ -41,8 +40,8 @@ try:
 
       processing_start_time = time.time()
 
-      frame: np.ndarray = qoi.decode(req.frame_encoded)
-      height, width, _ = frame.shape
+      frame = np.frombuffer(req.frame, dtype=np.uint8).reshape(req.shape)
+      width, height, *_ = frame.shape
 
       if args.display_raw_frames:
         cv.imshow("Camera stream (raw)", frame)
