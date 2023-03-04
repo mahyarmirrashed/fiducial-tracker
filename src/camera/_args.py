@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 from src.common import FileType, IntegerRangeType, PointType, SocketAddressType
 from src.common.models import SocketAddress
 
-_ALLOWABLE_VIDEO_TYPES = ["mp4", "webm"]
+_ALLOWABLE_VIDEO_TYPES = ["mkv", "mp4", "webm"]
 _DEFAULT_VIDEO_STREAM_ADDRESS = SocketAddress(host="localhost", port=5000)
 
 _parser = ArgumentParser(description="Fiducial tracker camera.")
