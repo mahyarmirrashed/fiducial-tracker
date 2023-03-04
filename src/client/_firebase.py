@@ -1,27 +1,42 @@
-from typing import Any, Dict
+from types import TracebackType
+from typing import Any, Dict, Union
 
 import decouple
 import firebase_admin as fb
 from firebase_admin import db
+from typing_extensions import Self
 
-from ._args import args
 from ._logger import logger
 
 
-class _FirebaseConnection:
-  def __init__(self) -> None:
+class FirebaseConnection:
+  def __init__(self, certificate: Union[str, None]) -> None:
+    self._certificate = certificate
+
     self._initialized = False
     self._ref: db.Reference
 
+  def __enter__(self) -> Self:
     self._establish_connection()
 
+    return self
+
+  def __exit__(
+    self,
+    exc_type: Union[BaseException, None],
+    exc_value: Union[BaseException, None],
+    traceback: Union[TracebackType, None],
+  ) -> None:
+    if self._initialized:
+      fb.delete_app(self._app)
+
   def _establish_connection(self) -> None:
-    if args.firebase_certificate is not None:
+    if self._certificate is not None:
       logger.debug("Initializing Firebase connection.")
 
       try:
-        fb.initialize_app(
-          fb.credentials.Certificate(args.firebase_certificate),
+        self._app = fb.initialize_app(
+          fb.credentials.Certificate(self._certificate),
           {"databaseURL": decouple.config("FIREBASE_DATABASE_URL")},
         )
       except decouple.UndefinedValueError:
@@ -43,6 +58,3 @@ class _FirebaseConnection:
       logger.debug("Completed storing data to Firebase RTDB.")
     else:
       logger.warn("Firebase connection not established. Cannot store information.")
-
-
-conn = _FirebaseConnection()
