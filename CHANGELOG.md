@@ -1,5 +1,39 @@
 
 
+## [0.13.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.12.0...0.13.0) (2023-03-04)
+
+
+### Features
+
+* add ability to convert fiducial readily to dictionary ([699b255](https://github.com/mahyarmirrashed/fiducial-tracker/commit/699b2551e0f5865391aa27d0a87104a62910a538))
+* add logger factory ([781ab3b](https://github.com/mahyarmirrashed/fiducial-tracker/commit/781ab3b132f310cf4a35aee7c8357f3b4d815795))
+* add socket address model ([ff77488](https://github.com/mahyarmirrashed/fiducial-tracker/commit/ff7748826706dedc1a3891c57195669097be29a4))
+* add socket address type for argument parsing ([4ebdb1c](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4ebdb1c60fe18171d0d59b29a4185cc820d6b2ab))
+* **camera:** add debugging message when server response times out ([55b5879](https://github.com/mahyarmirrashed/fiducial-tracker/commit/55b58797fe5e6560c8469d2df06bc519080ac189))
+* **camera:** add logger object ([025af3e](https://github.com/mahyarmirrashed/fiducial-tracker/commit/025af3e5467d8d64bc8707cb60443588ea45fa89))
+* **camera:** use camera logger for printing messages ([4059ff9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4059ff98999031ce631c7b4b8dee20d18b23c931))
+* **camera:** use socket address rather than port number ([080ec93](https://github.com/mahyarmirrashed/fiducial-tracker/commit/080ec939bfc741feb7f53b4f087bc387f9ad6b00))
+* **client:** add argument for supplying firebase rtdb certificate file ([a19bf84](https://github.com/mahyarmirrashed/fiducial-tracker/commit/a19bf844d4a08ff2b79f59ca316ee712b87ec1f0))
+* **client:** add firebase connection provider ([09b5ca9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/09b5ca9a42560d783ab6c897a113353e926dbf66))
+* **client:** add logger object ([4d0ef34](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4d0ef3484fae1103e4c145ef6d912eb8246b24ce))
+* **client:** use client logger for printing messages ([32191d0](https://github.com/mahyarmirrashed/fiducial-tracker/commit/32191d0c614567905e7388472d71774950af1b92))
+* convert all hostnames to ip addresses after initialization ([dc5e3e1](https://github.com/mahyarmirrashed/fiducial-tracker/commit/dc5e3e1fd41d9123ac49c403dbc538ae599fb62e))
+* parse video stream address as full socket address ([95d655b](https://github.com/mahyarmirrashed/fiducial-tracker/commit/95d655beb9d2ea375c14483acdeba7e8f6bcaf50))
+* **server:** add basic logging for start up and exit ([09a5117](https://github.com/mahyarmirrashed/fiducial-tracker/commit/09a51176abcf5744411752a955247651b8774fbc))
+* **server:** add flag for showing server status rather than logging messages ([ab9c14a](https://github.com/mahyarmirrashed/fiducial-tracker/commit/ab9c14afa5dae2ad4f8476203a13f8db600e04eb))
+* **server:** add logger object ([4106bf0](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4106bf0c9f29f0a11c84cbbbaedd3fbabc8f6a0a))
+* **server:** do not show status when flag is not set ([704b312](https://github.com/mahyarmirrashed/fiducial-tracker/commit/704b3120b1923783a2f9efc3d9496916cb7a6102))
+* **server:** use socket address rather than port numbers ([4adecd1](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4adecd1d8e9237afd15625af2f8c1508a85a46c5))
+
+
+### Bug Fixes
+
+* add logger factory as a module export ([3e01e1c](https://github.com/mahyarmirrashed/fiducial-tracker/commit/3e01e1c2eb8c12e646de0c4f6e5e925b0552169c))
+* **camera:** immediately discard any unsent messages ([549cd4c](https://github.com/mahyarmirrashed/fiducial-tracker/commit/549cd4c5b888e419aa97b6c867bc8ce6ac64d7cd))
+* custom `repr` for shortening decimal places ([9bf032f](https://github.com/mahyarmirrashed/fiducial-tracker/commit/9bf032f85b28c41b33b93bbb4dfbe448f9126b09))
+* properly parse list fields ([5174905](https://github.com/mahyarmirrashed/fiducial-tracker/commit/51749059350df46302441015d3bd994da28eac58))
+* set namespace variable for video stream address ([e8b27f9](https://github.com/mahyarmirrashed/fiducial-tracker/commit/e8b27f9557919d6af85bbeccbe5b7390aef2198c))
+
 ## [0.12.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.11.0...0.12.0) (2023-02-22)
 
 
