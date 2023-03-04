@@ -1,15 +1,25 @@
+from collections import namedtuple
+from typing import Tuple
+
+import cv2 as cv
 import numpy as np
+import zxingcpp
 from cachetools import TTLCache
-from pyzbar import pyzbar
-from pyzbar.locations import Rect
-from pyzbar.pyzbar import Decoded
 
 from src.common.models import Fiducial, Point, VideoStreamRequestMessage
 
-from ._utils import draw_rectangle
+_Point = namedtuple("Point", "x y")
 
-obj: Decoded
-bbox: Rect
+
+def _parse_corners(
+  position: zxingcpp.Position,
+) -> Tuple[_Point, _Point, _Point, _Point]:
+  return (
+    _Point(x=position.top_left.x, y=position.top_left.y),
+    _Point(x=position.top_right.x, y=position.top_right.y),
+    _Point(x=position.bottom_right.x, y=position.bottom_right.y),
+    _Point(x=position.bottom_left.x, y=position.bottom_left.y),
+  )
 
 
 def track_fiducial(
@@ -20,21 +30,21 @@ def track_fiducial(
 ) -> None:
   width, height, *_ = frame.shape
 
-  for obj in pyzbar.decode(frame, symbols=[pyzbar.ZBarSymbol.QRCODE]):
-    bbox: Rect = obj.rect
-    identifier = obj.data.decode("utf-8")
+  for detection in zxingcpp.read_barcodes(frame, formats=zxingcpp.BarcodeFormat.QRCode):
+    id = detection.text
+    corners = _parse_corners(detection.position)
+    top_left, _, bottom_right, _ = corners
 
-    cache[identifier] = Fiducial(
-      id=identifier,
-      location=Point(x=bbox.left + bbox.width // 2, y=bbox.top + bbox.height // 2)
+    cache[id] = Fiducial(
+      id=id,
+      location=Point(
+        x=(top_left.x + bottom_right.x) // 2,
+        y=(top_left.y + bottom_right.y) // 2,
+      )
       .normalize(width, height)
       .scale(*req.get_view())
       .add(req.top_left_corner),
     )
 
     if draw:
-      draw_rectangle(
-        frame=frame,
-        topleft=(bbox.left, bbox.top),
-        bottomright=(bbox.left + bbox.width, bbox.top + bbox.height),
-      )
+      cv.polylines(frame, [np.array(corners, dtype=np.int32)], True, 255)
