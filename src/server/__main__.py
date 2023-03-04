@@ -45,7 +45,7 @@ try:
         cv.waitKey(1)
 
       recommended_fps = 1 / (time.time() - processing_start_time)
-      recommended_fps_balanced = recommended_fps / len(camera_cache)
+      recommended_fps_balanced = recommended_fps / max(len(_camera_feed_cache), 1)
 
       comms.send_video_stream(recommended_fps_balanced)
 except KeyboardInterrupt:
