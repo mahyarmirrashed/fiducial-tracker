@@ -28,7 +28,7 @@ def track_fiducial(
   cache: TTLCache,
   draw: bool = False,
 ) -> None:
-  width, height, *_ = frame.shape
+  height, width, *_ = frame.shape
 
   for detection in zxingcpp.read_barcodes(frame, formats=zxingcpp.BarcodeFormat.QRCode):
     id = detection.text
