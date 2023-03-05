@@ -19,7 +19,7 @@ _camera_feed_window_manager_heartbeat = Heartbeat(5)
 _fiducial_cache = TTLCache(maxsize=10, ttl=5)
 _fiducial_publisher_heartbeat = Heartbeat(1 / args.frequency)
 
-logger.info(f"Starting fiducial tracker server.")
+logger.info("Starting fiducial tracker server.")
 
 show_status(running=True)
 
