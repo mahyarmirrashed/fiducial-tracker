@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/tokei/lines/github/mahyarmirrashed/fiducial-tracker" alt="Total repo lines" />
 </p>
 
-An array of cameras sends video streams to the server module. There, the server, using `pyzbar`, a QR code scanning library, analyzes for QR code fiducials, and published their tracked locations to listening clients.
+An array of cameras sends video streams to the server module. There, the server, using `zxingcpp`, a general purpose barcode code scanning library, analyzes for QR code fiducials, and published their tracked locations to listening clients.
 
 ![](res/architecture.png)
 
