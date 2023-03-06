@@ -226,4 +226,5 @@ dependencies:
     - rsa==4.9
     - six==1.16.0
     - uritemplate==4.1.1
+    - zxing-cpp==2.0.0
 prefix: /home/mmirrashed/.conda/envs/fiducial-tracker
