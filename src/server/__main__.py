@@ -30,6 +30,8 @@ try:
       _camera_feed_cache[req.camera_id] = None
 
       if _fiducial_publisher_heartbeat.has_interval_passed():
+        logger.debug("Sending fiducial locations to clients.")
+
         comms.send_location_stream(fiducials=list(_fiducial_cache.values()))
 
       processing_start_time = time.time()
@@ -45,6 +47,8 @@ try:
         display_manager.display(f"Processed stream ({req.camera_id})", frame)
 
       if _camera_feed_window_manager_heartbeat.has_interval_passed():
+        logger.debug("Closing old display windows.")
+
         display_manager.close_old(_camera_feed_cache.keys())
 
       recommended_fps = 1 / (time.time() - processing_start_time)
