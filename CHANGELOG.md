@@ -1,5 +1,7 @@
 
 
+## [0.14.2](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.14.1...0.14.2) (2023-03-06)
+
 ## [0.14.1](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.14.0...0.14.1) (2023-03-04)
 
 
