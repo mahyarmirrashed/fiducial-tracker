@@ -1,4 +1,4 @@
-import datetime
+import time
 import uuid
 from types import TracebackType
 from typing import List, Optional, Union
@@ -56,7 +56,7 @@ class Commmunicator:
           camera_id=self._uuid,
           frame=frame.tobytes(),
           shape=frame.shape,
-          timestamp=datetime.datetime.now(),
+          timestamp=time.time(),
           top_left_corner=self._top_left_corner,
           bottom_right_corner=self._bottom_right_corner,
         ).to_dict()
