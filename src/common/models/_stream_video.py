@@ -17,7 +17,7 @@ class VideoStreamRequestMessage(DictMixin):
   camera_id: uuid.UUID
   frame: bytes
   shape: Tuple[int, ...]
-  timestamp: datetime.datetime
+  timestamp: float
   top_left_corner: Point
   bottom_right_corner: Point
 
