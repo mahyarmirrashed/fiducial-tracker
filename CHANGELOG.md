@@ -1,5 +1,14 @@
 
 
+## [0.15.0](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.14.2...0.15.0) (2023-03-08)
+
+
+### Features
+
+* **camera:** update to match new video stream protocol ([25edf15](https://github.com/mahyarmirrashed/fiducial-tracker/commit/25edf15079d25af7a8fde149dcdf6aaa8166af00))
+* **models:** use float for timestamp rather than datetime object ([4ff117e](https://github.com/mahyarmirrashed/fiducial-tracker/commit/4ff117e74c1b7e26adc0bedbf2d6ae0f4b064e89))
+* **server:** add exit condition to discard stale requests and reply with default fps recommendation ([be12695](https://github.com/mahyarmirrashed/fiducial-tracker/commit/be126958fef5f46bed91f4a29b8d3ecf0c1548fe))
+
 ## [0.14.2](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.14.1...0.14.2) (2023-03-06)
 
 ## [0.14.1](https://github.com/mahyarmirrashed/fiducial-tracker/compare/0.14.0...0.14.1) (2023-03-04)
